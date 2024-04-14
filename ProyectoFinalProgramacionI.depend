@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1712808410 source:c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\main.cpp
+	<iostream>
+	<windows.h>
+	<Utilerias.h>
+	<FiguraGeometricaCirculo.h>
+	<FiguraGeometricaCuadrado.h>
+
+1712808056 c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\utilerias.h
+	<string>
+
+1712808000 source:c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\utilerias.cpp
+	"Utilerias.h"
+	<iostream>
+	<string>
+	<windows.h>
+
+1712806753 source:c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\figurageometrica\figurageometricacirculo.cpp
+	"FiguraGeometricaCirculo.h"
+	"../Utilerias.h"
+
+1712806693 c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\figurageometricacirculo.h
+
+1712808357 source:c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\figurageometrica\figurageometricacuadrado.cpp
+	<iostream>
+	<Utilerias.h>
+	<FiguraGeometricaCuadrado.h>
+
+1712806943 c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\figurageometricacuadrado.h
+
+1712512329 source:c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\figurageometrica\figurageometricarectangulo.cpp
+	"FiguraGeometricaRectangulo.h"
+
+1712512329 c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\figurageometricarectangulo.h
+
+1712512329 source:c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\figurageometrica\figurageometricatriangulo.cpp
+	"FiguraGeometricaTriangulo.h"
+
+1712512329 c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\figurageometricatriangulo.h
+
