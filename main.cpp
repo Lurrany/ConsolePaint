@@ -1,13 +1,14 @@
 #include <iostream>
 #include <windows.h>
-#include <Utilerias.h>
-#include <FiguraGeometricaCirculo.h>
-#include <FiguraGeometricaCuadrado.h>
+#include "Utilerias.h"
+#include "FiguraGeometricaCirculo.h"
+#include "FiguraGeometricaCuadrado.h"
 using namespace std;
 
 
 int main()
 {
+
     //Clase de utilerias
     Utilerias Uti;
     Uti.MenuPrincipal();
@@ -38,6 +39,16 @@ int main()
         }
         if(GetKeyState(VK_ESCAPE) & 0x8000){
             repetir = false;
+        }
+        if(GetKeyState('U') & 0X8000){
+            CONSOLE_SCREEN_BUFFER_INFO csbi;
+            int columnas, filas;
+
+            GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+            columnas = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+            filas = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+
+            cout << "columnas: " << columnas << " filas: " << filas;
         }
         DWORD time;
         time = 50;

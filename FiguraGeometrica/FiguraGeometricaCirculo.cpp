@@ -1,4 +1,4 @@
-#include "FiguraGeometricaCirculo.h"
+#include "../FiguraGeometricaCirculo.h"
 #include "../Utilerias.h"
 
 void FiguraGeometricaCirculo::ImprimirCirculo(int x, int y, bool Relleno, char Caracter, float Radio){

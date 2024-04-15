@@ -38,3 +38,38 @@
 
 1712512329 c:\users\adele\onedrive\umg\tercer semestre\programación i\proyectofinalprogramacioni\figurageometricatriangulo.h
 
+1713154285 source:c:\users\adele\onedrive\documents\dev\consolepaint\figurageometrica\figurageometricacirculo.cpp
+	"../FiguraGeometricaCirculo.h"
+	"../Utilerias.h"
+
+1713154264 c:\users\adele\onedrive\documents\dev\consolepaint\utilerias.h
+	<string>
+
+1713153366 source:c:\users\adele\onedrive\documents\dev\consolepaint\figurageometrica\figurageometricarectangulo.cpp
+	"FiguraGeometricaRectangulo.h"
+
+1713153366 source:c:\users\adele\onedrive\documents\dev\consolepaint\figurageometrica\figurageometricatriangulo.cpp
+	"FiguraGeometricaTriangulo.h"
+
+1713153366 source:c:\users\adele\onedrive\documents\dev\consolepaint\main.cpp
+	<iostream>
+	<windows.h>
+	<Utilerias.h>
+	<FiguraGeometricaCirculo.h>
+	<FiguraGeometricaCuadrado.h>
+
+1713153366 source:c:\users\adele\onedrive\documents\dev\consolepaint\utilerias.cpp
+	"Utilerias.h"
+	<iostream>
+	<string>
+	<windows.h>
+
+1713153900 source:c:\users\adele\onedrive\documents\dev\consolepaint\figurageometrica\figurageometricacuadrado.cpp
+	<iostream>
+	"../Utilerias.h"
+	"../FiguraGeometricaCuadrado.h"
+
+1713153366 c:\users\adele\onedrive\documents\dev\consolepaint\figurageometricacuadrado.h
+
+1713153366 c:\users\adele\onedrive\documents\dev\consolepaint\figurageometricacirculo.h
+

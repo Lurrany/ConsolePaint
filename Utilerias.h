@@ -1,6 +1,7 @@
 #ifndef UTILERIAS_H
 #define UTILERIAS_H
 #include <string>
+
 class Utilerias{
 //Metodos/propiedades publicas.
 public:

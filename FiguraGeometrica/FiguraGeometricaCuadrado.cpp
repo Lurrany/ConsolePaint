@@ -1,11 +1,13 @@
 #include <iostream>
-#include <Utilerias.h>
-#include <FiguraGeometricaCuadrado.h>
+#include "../Utilerias.h"
+#include "../FiguraGeometricaCuadrado.h"
 
 using namespace std;
 
 void FiguraGeometricaCuadrado::ImprimirCuadrado(int x, int y, int Ancho, bool Relleno, char Caracter){
+    //Uso de la clase utilerias.
     Utilerias Uti;
+    //mover el cursor a la coordenada indicada.
     Uti.MoverACoordenada(x, y);
     int EquivalenciaAltura = (Ancho*0.6);
     char Pantalla[EquivalenciaAltura][Ancho];
