@@ -1,6 +1,7 @@
 #ifndef UTILERIAS_H
 #define UTILERIAS_H
 #include <string>
+#include "TamanoPantalla.h"
 
 class Utilerias{
 //Metodos/propiedades publicas.
@@ -13,6 +14,8 @@ public:
     void LimpiarPantalla();
     //metodo para imprimir el menu principal
     int MenuPrincipal();
+    //Mostrar sub menu de figuras
+    int MostrarSubMenuFiguras();
     //Metodo para ingreso de información
     std::string LeerValorTexto(std::string Mensaje, int TamanoTexto);
     //Leer valores numericos
@@ -27,5 +30,12 @@ public:
     int ObtenerCoordenadaX();
     //obtener coordenada y
     int ObtenerCoordenadaY();
+    //obtener columnas
+    int ObtenerColumnas();
+    //obtener filas
+    int ObtenerFilas();
+private:
+    //Obtener tamaño de pantalla;
+    void ObtenerTamanoDePantalla();
 };
 #endif // UTILERIAS_H

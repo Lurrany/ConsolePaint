@@ -8,11 +8,11 @@ using namespace std;
 
 int main()
 {
-
     //Clase de utilerias
     Utilerias Uti;
-    Uti.MenuPrincipal();
-    Uti.MoverCursor(0, 0);
+    Uti.ObtenerCoordenadaX();
+    Uti.MostrarControles();
+    Uti.MoverACoordenada(10, 10);
     FiguraGeometricaCuadrado Cuadrado;
     //std::string textoIngresado = Uti.LeerValorTexto("Ingrese un texto",100);
     //Uti.MostrarMensaje(textoIngresado, false);
@@ -21,7 +21,6 @@ int main()
     while(repetir){
         if((GetKeyState(VK_LEFT) & 0x8000) || (GetKeyState('A') & 0x8000)){
             Uti.MoverCursor(-1,0);
-
         }
         if((GetKeyState(VK_RIGHT) & 0x8000) || (GetKeyState('D') & 0x8000)){
             Uti.MoverCursor(1,0);
@@ -35,26 +34,25 @@ int main()
         if(GetKeyState('P') & 0X8000){
             int _x = Uti.ObtenerCoordenadaX();
             int _y = Uti.ObtenerCoordenadaY();
-            Cuadrado.ImprimirCuadrado(_x, _y, 20, false, '*');
+            //Cuadrado.ImprimirCuadrado(_x, _y, 20, false, '*');
+            cout << _x << " " << _y;
         }
         if(GetKeyState(VK_ESCAPE) & 0x8000){
             repetir = false;
         }
         if(GetKeyState('U') & 0X8000){
-            CONSOLE_SCREEN_BUFFER_INFO csbi;
             int columnas, filas;
-
-            GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-            columnas = csbi.srWindow.Right - csbi.srWindow.Left + 1;
-            filas = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-
-            cout << "columnas: " << columnas << " filas: " << filas;
+            columnas = Uti.ObtenerColumnas();
+            filas = Uti.ObtenerFilas();
+            cout << "X: " << columnas << " Y: " << filas;
         }
+        if(GetKeyState(VK_F12) & 0X8000){
+            Uti.MenuPrincipal();
+        }
+
         DWORD time;
-        time = 50;
+        time = 65;
         Sleep(time);
     }
     return 0;
 }
-
-

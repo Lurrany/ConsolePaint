@@ -40,19 +40,58 @@ int Utilerias::LeerValorNumerico(std::string Mensaje){
 }
 //Metodo para imprimir el menú
 int Utilerias::MenuPrincipal(){
-    cout << "___________________" << endl;
-    cout << "|"  << "Menu, paint 1.0.0" << "|" << endl;
-    cout << "___________________" << endl;
-
-    //leer opcion ingresada
+    int Opcion;
+    cout << ":::::::::::::::::" << endl;
+    MoverCursor(0,1);
+    cout << ":: Paint 1.0.0 ::" << endl;
+    MoverCursor(0,1);
+    cout << ":::::::::::::::::" << endl;
+    MoverCursor(0,1);
+    cout << "::1 Graficar   ::" << endl;
+    MoverCursor(0,1);
+    cout << "::2 Guardar    ::" << endl;
+    MoverCursor(0,1);
+    cout << "::3 Abrir      ::" << endl;
+    MoverCursor(0,1);
+    cout << ":::::::::::::::::" << endl;
+    MoverCursor(0,1);
+    cout << ">";
+    cin >> Opcion;
+    cin.ignore();
+    if(Opcion == 1){
+        MostrarSubMenuFiguras();
+    }
     return 0;
 }
+int Utilerias::MostrarSubMenuFiguras(){
+    int Opcion;
+    MoverCursor(10,1);
+    cout << ":::::::::::::::::" << endl;
+    MoverCursor(0,1);
+    cout << "::   Figuras   ::" << endl;
+    MoverCursor(0,1);
+    cout << ":::::::::::::::::" << endl;
+    MoverCursor(0,1);
+    cout << "::1 Triangulo  ::" << endl;
+    MoverCursor(0,1);
+    cout << "::2 Cuadrado   ::" << endl;
+    MoverCursor(0,1);
+    cout << "::3 Rectangulo ::" << endl;
+    MoverCursor(0,1);
+    cout << "::4 Circulo    ::" << endl;
+    MoverCursor(0,1);
+    cout << ":::::::::::::::::" << endl;
+    MoverCursor(0,1);
+    cout << ">";
+    cin >> Opcion;
+    cin.ignore();
+}
 void Utilerias::MostrarControles(){
-    cout << "CONTROLES: ARRIBA: W, UP; ABAJO: S, DOWN; IZQUIERDA: A, LEFT; DERECHA: D, DOWN" << endl;
+    cout << "F12: Abrir menu | paint 1.0.0";
 }
 //variables de coordenadas.
 int _coordenadaX = 0;
-int _coordenadaY = 3;
+int _coordenadaY = 0;
 //obtener coordenada x
 int Utilerias::ObtenerCoordenadaX(){
     return _coordenadaX;
@@ -66,12 +105,25 @@ void Utilerias::MoverCursor(int PosicionX, int PosicionY){
     //Asignar nuevos valores a las variables de coordenada para guardar la posicio.
     _coordenadaX += PosicionX;
     _coordenadaY += PosicionY;
-       //verificar cursor que el cursor x no este en negativo.
-    if(_coordenadaX < 0)
+    //verificar que el cursor no salga de la pantalla :D
+    //verificar coordenada x
+    if(_coordenadaX >= ObtenerColumnas()){
         _coordenadaX = 0;
-    if(_coordenadaY < 3)
-        _coordenadaY = 3;
-
+        //_coordenadaY ;
+    }
+    else if(_coordenadaX < 0){
+        _coordenadaX = ObtenerColumnas();
+        //_coordenadaY--;
+    }
+    //verificar coordenada y
+    if(_coordenadaY >= ObtenerFilas()){
+        _coordenadaY = 0;
+        //_coordenadaX ++;
+    }
+    else if(_coordenadaY < 0){
+        //_coordenadaX--;
+        _coordenadaY = ObtenerFilas()-1;
+    }
     COORD CoordenadaNueva;
     CoordenadaNueva.X = _coordenadaX;
     CoordenadaNueva.Y = _coordenadaY;
@@ -83,7 +135,31 @@ void Utilerias::MoverACoordenada(int PosicionX, int PosicionY){
     COORD CoordenadaNueva;
     CoordenadaNueva.X = PosicionX;
     CoordenadaNueva.Y = PosicionY;
-
+    _coordenadaX = PosicionX;
+    _coordenadaY = PosicionY;
     //asignar la nueva coordenada.
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CoordenadaNueva);
+}
+//Variables para guardar el tamaño de la pantalla
+int _columnas;
+int _filas;
+void Utilerias::ObtenerTamanoDePantalla(){
+    //buffer de la pantalla
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    //obtener la informacion de la pantalla
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    //asignar las columnas de la pantalla
+    _columnas = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+    //asignar las filas de la pantalla
+    _filas = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+}
+//Obtener columnas
+int Utilerias::ObtenerColumnas(){
+    ObtenerTamanoDePantalla();
+    return _columnas;
+}
+//Obtener filas
+int Utilerias::ObtenerFilas(){
+    ObtenerTamanoDePantalla();
+    return _filas;
 }
