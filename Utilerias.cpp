@@ -2,8 +2,13 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include "FiguraGeometricaCuadrado.h"
+#include "FiguraGeometricaRectangulo.h"
+#include "Entidades.h"
+
 
 using namespace std;
+int CoordenadaXGuardada, CoordenadaYGuardada;
 //Metodo para imprimir un mensaje.
 void Utilerias::MostrarMensaje(std::string Mensaje, bool SaltoLinea){
     cout << Mensaje << endl;
@@ -41,6 +46,7 @@ int Utilerias::LeerValorNumerico(std::string Mensaje){
 //Metodo para imprimir el menú
 int Utilerias::MenuPrincipal(){
     int Opcion;
+    GuardarCoordenadasActuales();
     cout << ":::::::::::::::::" << endl;
     MoverCursor(0,1);
     cout << ":: Paint 1.0.0 ::" << endl;
@@ -58,8 +64,10 @@ int Utilerias::MenuPrincipal(){
     cout << ">";
     cin >> Opcion;
     cin.ignore();
-    if(Opcion == 1){
+    switch(Opcion){
+    case 1:
         MostrarSubMenuFiguras();
+        break;
     }
     return 0;
 }
@@ -85,9 +93,55 @@ int Utilerias::MostrarSubMenuFiguras(){
     cout << ">";
     cin >> Opcion;
     cin.ignore();
+    switch(Opcion){
+    case 2:
+        MostrarSubMenuCuadro();
+        break;
+    case 3:
+        MostrarSubMenuRectangulo();
+        break;
+    }
+
+}
+void Utilerias::MostrarSubMenuCuadro(){
+    //objeto cuadrado
+    Cuadrado NuevoCuadrado;
+    //Asignar Valores al objeto :D
+    NuevoCuadrado.CoordenadaX = CoordenadaXGuardada;
+    NuevoCuadrado.CoordenadaY = CoordenadaYGuardada;
+    NuevoCuadrado.MostrarRelleno = false;
+    NuevoCuadrado.Caracter = '*';
+    MoverCursor(0,1);
+    cout << "Ancho del cuadro: ";
+    cin >> NuevoCuadrado.Ancho;
+
+    FiguraGeometricaCuadrado Cuadrado;
+    Cuadrado.ImprimirCuadrado(NuevoCuadrado);
+}
+void Utilerias::MostrarSubMenuRectangulo(){
+    //Objeto Rectangulo
+    Rectangulo NuevoRect;
+    //asignar valores al objeto
+    NuevoRect.CoordenadaX = CoordenadaXGuardada;
+    NuevoRect.CoordenadaY = CoordenadaYGuardada;
+    NuevoRect.MostrarRelleno = false;
+    NuevoRect.Caracter = '*';
+
+    MoverCursor(0,1);
+    cout << "Ancho del rectangulo: ";
+    cin >> NuevoRect.Ancho;
+    cin.ignore();
+    MoverCursor(0,1);
+    cout << "Alto del rectangulo: ";
+    cin >> NuevoRect.Alto;
+    cin.ignore();
+
+    FiguraGeometricaRectangulo Rectangulo;
+    Rectangulo.ImprimirRectangulo(NuevoRect);
+
 }
 void Utilerias::MostrarControles(){
-    cout << "F12: Abrir menu | paint 1.0.0";
+    cout << "F12: Abrir menu | Esc: Salir | paint 1.0.0";
 }
 //variables de coordenadas.
 int _coordenadaX = 0;
@@ -162,4 +216,25 @@ int Utilerias::ObtenerColumnas(){
 int Utilerias::ObtenerFilas(){
     ObtenerTamanoDePantalla();
     return _filas;
+}
+//Guardar coordenadas actuales en las variables.
+void Utilerias::GuardarCoordenadasActuales(){
+    CoordenadaXGuardada = ObtenerCoordenadaX();
+    CoordenadaYGuardada = ObtenerCoordenadaY();
+}
+//Simular tecla
+void Utilerias::SimularTecla(WORD Tecla){
+     //simular F11 para pantalla completa
+    INPUT Entrada;
+    //Evento del teclado
+    Entrada.type = INPUT_KEYBOARD;
+    Entrada.ki.wScan = 0;
+    Entrada.ki.time = 0;
+    Entrada.ki.dwExtraInfo = 0;
+
+    //Ingreso de la tecla F11
+    Entrada.ki.wVk = Tecla;
+    Entrada.ki.dwFlags = 0;
+    //Enviar la tencla a ser presionada.
+    SendInput(1, &Entrada, sizeof(INPUT));
 }

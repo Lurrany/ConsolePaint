@@ -38,6 +38,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Entidades.cpp" />
+		<Unit filename="Entidades.h" />
 		<Unit filename="FiguraGeometricaCirculo.h" />
 		<Unit filename="FiguraGeometricaCuadrado.h" />
 		<Unit filename="FiguraGeometricaRectangulo.h" />

@@ -1,24 +1,24 @@
 #include <iostream>
 #include "../Utilerias.h"
 #include "../FiguraGeometricaCuadrado.h"
+#include "../Entidades.h"
 
 using namespace std;
 
-void FiguraGeometricaCuadrado::ImprimirCuadrado(int x, int y, int Ancho, bool Relleno, char Caracter){
+void FiguraGeometricaCuadrado::ImprimirCuadrado(const Cuadrado& Cuadro){
     //Uso de la clase utilerias.
     Utilerias Uti;
     //mover el cursor a la coordenada indicada.
-    Uti.MoverACoordenada(x, y);
-    int EquivalenciaAltura = (Ancho*0.6);
-    char Pantalla[EquivalenciaAltura][Ancho];
-    for(int c = 0; c < EquivalenciaAltura; c++){
-        for(int i = 0; i < Ancho; i++){
-                if((c == 0) || (c == (EquivalenciaAltura-1)) || (i == 0) || (i == (Ancho-1))){
-                    Pantalla[c][i] = Caracter;
+    Uti.MoverACoordenada(Cuadro.CoordenadaX, Cuadro.CoordenadaY);
+    char Pantalla[Cuadro.Ancho][Cuadro.Ancho];
+    for(int c = 0; c < Cuadro.Ancho; c++){
+        for(int i = 0; i < Cuadro.Ancho; i++){
+                if((c == 0) || (c == (Cuadro.Ancho-1)) || (i == 0) || (i == (Cuadro.Ancho-1))){
+                    Pantalla[c][i] = Cuadro.Caracter;
                 }
                 else{
-                    if(Relleno){
-                        Pantalla[c][i] = Caracter;
+                    if(Cuadro.MostrarRelleno){
+                        Pantalla[c][i] = Cuadro.Caracter;
                     }
                     else{
                         Pantalla[c][i] = ' ';

@@ -2,6 +2,7 @@
 #define UTILERIAS_H
 #include <string>
 #include "TamanoPantalla.h"
+#include <windows.h>
 
 class Utilerias{
 //Metodos/propiedades publicas.
@@ -34,8 +35,18 @@ public:
     int ObtenerColumnas();
     //obtener filas
     int ObtenerFilas();
+    //simular presionar tecla
+    void SimularTecla(WORD Tecla);
+
 private:
     //Obtener tamaño de pantalla;
     void ObtenerTamanoDePantalla();
+    //Submenu de infromación del cuadro
+    void MostrarSubMenuCuadro();
+    //Submenu de información del rectangulo.
+    void MostrarSubMenuRectangulo();
+    //Guardar coordenadas
+    void GuardarCoordenadasActuales();
+
 };
 #endif // UTILERIAS_H
