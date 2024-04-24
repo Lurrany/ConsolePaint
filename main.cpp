@@ -1,45 +1,64 @@
 #include <iostream>
 #include <windows.h>
 #include "Utilerias.h"
-#include "FiguraGeometricaCirculo.h"
-#include "FiguraGeometricaCuadrado.h"
 #include <Entidades.h>
 #include <list>
+#include "FiguraGeometricaCirculo.h""
+#include "FiguraGeometricaCuadrado.h"
+#include "FiguraGeometricaRectangulo.h"
+#include "FiguraGeometricaTriangulo.h"
 
-std::list<Rectangulo> Rectangulos;
+
 using namespace std;
+//listas con las figuras graficadas.
+std::list<Rectangulo> _rectangulos;
+std::list<Cuadrado> _cuadros;
+std::list<Circulo> _circulos;
+std::list<Triangulo> _triangulos;
 
+bool Redibujando = false;
+void Redibujar(){
+    if(!Redibujando){
+        Redibujando = true;
+        //Redibular rectangulos
+        for(auto Re:_rectangulos){
+            //llamar a graficar
+            FiguraGeometricaRectangulo FigRectangulo;
+            FigRectangulo.ImprimirRectangulo(Re);
+
+        }
+        //Redibular cuadros
+        for(auto Cu:_cuadros){
+            //llamar a graficar
+            FiguraGeometricaCuadrado FigCuadrado;
+            FigCuadrado.ImprimirCuadrado(Cu);
+        }
+        //Redibular circulos
+        for(auto Ci:_circulos){
+            //llamar a graficar
+            FiguraGeometricaCirculo FigCirculo;
+            //FigCirculo.ImprimirCirculo(Ci);
+
+        }
+        //Redibular triangulos
+        for(auto Re:_triangulos){
+            //llamar a graficar
+        }
+        Redibujando = false;
+    }
+
+}
 int main()
 {
-    //Pruebas con listas
-    /*
-    Rectangulo Rect2;
-    Rect2.Alto = 3;
-    Rect2.Ancho = 4;
-    Rect2.Caracter = 'F';
-    Rect2.CoordenadaX = 100;
-    Rect2.CoordenadaY = 100;
-    Rectangulos.push_back(Rect2);
-
-    for(auto Rec:Rectangulos){
-        cout << Rec.Alto << endl;
-        cout << Rec.Ancho << endl;
-        cout << Rec.Caracter << endl;
-    }
-    */
-
     //Clase de utilerias
     Utilerias Uti;
     //Simular tecla f11 para poner en pantalla completa :D
     Uti.SimularTecla(VK_F11);
-    Uti.ObtenerColumnas();
 
     //Declarar matriz de pantalla luego de maximizar
     int Pantalla[Uti.ObtenerFilas()][Uti.ObtenerCoordenadaX()];
-
     Uti.MostrarControles();
     Uti.MoverACoordenada(10, 10);
-    FiguraGeometricaCuadrado Cuadrado;
     //std::string textoIngresado = Uti.LeerValorTexto("Ingrese un texto",100);
     //Uti.MostrarMensaje(textoIngresado, false);
     ShowCursor(true);
@@ -58,7 +77,48 @@ int main()
             Uti.MoverCursor(0, 1);
         }
         if(GetKeyState(VK_F12) & 0X8000){
-            Uti.MenuPrincipal();
+            //1 = triangulo
+            //2 = cuadrado
+            //3 = rectangulo
+            //4 = circulo
+            int Op = Uti.MenuPrincipal();
+
+            cout << Op;
+            switch(Op){
+            case 1:
+                //Triangulo
+                Triangulo TriGraficado;
+                TriGraficado = Uti.ObtenerUltimoTriangulo();
+                break;
+            case 2:
+                //Cuadrado
+                Cuadrado CuadradoGraficado;
+                CuadradoGraficado = Uti.ObtenerUltimoCuadrado();
+                break;
+            case 3:
+                //Rectangulo
+                Rectangulo RectanguloGraficado;
+                RectanguloGraficado = Uti.ObtenerUltimoRectangulo();
+                _rectangulos.push_back(RectanguloGraficado);
+                //Redibujar
+                Redibujar();
+                break;
+            case 4:
+                //Circulo
+                Circulo CirculoGraficado;
+                CirculoGraficado = Uti.ObtenerUltimoCirculo();
+                break;
+            }
+
+        }
+        if(GetKeyState(VK_ESCAPE) & 0x8000){
+            repetir = false;
+        }
+        if(GetKeyState(VK_SPACE) & 0x8000){
+            cout << " ";
+        }
+        if(GetKeyState('P') & 0x8000){
+
         }
 
         DWORD time;

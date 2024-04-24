@@ -8,7 +8,12 @@
 
 
 using namespace std;
-int CoordenadaXGuardada, CoordenadaYGuardada;
+int _coordenadaXGuardada, _coordenadaYGuardada;
+Cuadrado _ultimoCuadrado;
+Circulo _ultimoCirculo;
+Rectangulo _ultimoRectangulo;
+Triangulo _ultimoTriangulo;
+
 //Metodo para imprimir un mensaje.
 void Utilerias::MostrarMensaje(std::string Mensaje, bool SaltoLinea){
     cout << Mensaje << endl;
@@ -66,10 +71,10 @@ int Utilerias::MenuPrincipal(){
     cin.ignore();
     switch(Opcion){
     case 1:
-        MostrarSubMenuFiguras();
+        Opcion = MostrarSubMenuFiguras();
         break;
     }
-    return 0;
+    return Opcion;
 }
 int Utilerias::MostrarSubMenuFiguras(){
     int Opcion;
@@ -101,14 +106,14 @@ int Utilerias::MostrarSubMenuFiguras(){
         MostrarSubMenuRectangulo();
         break;
     }
-
+    return Opcion;
 }
 void Utilerias::MostrarSubMenuCuadro(){
     //objeto cuadrado
     Cuadrado NuevoCuadrado;
     //Asignar Valores al objeto :D
-    NuevoCuadrado.CoordenadaX = CoordenadaXGuardada;
-    NuevoCuadrado.CoordenadaY = CoordenadaYGuardada;
+    NuevoCuadrado.CoordenadaX = _coordenadaXGuardada;
+    NuevoCuadrado.CoordenadaY = _coordenadaYGuardada;
     NuevoCuadrado.MostrarRelleno = false;
     NuevoCuadrado.Caracter = '*';
     MoverCursor(0,1);
@@ -122,8 +127,8 @@ void Utilerias::MostrarSubMenuRectangulo(){
     //Objeto Rectangulo
     Rectangulo NuevoRect;
     //asignar valores al objeto
-    NuevoRect.CoordenadaX = CoordenadaXGuardada;
-    NuevoRect.CoordenadaY = CoordenadaYGuardada;
+    NuevoRect.CoordenadaX = _coordenadaXGuardada;
+    NuevoRect.CoordenadaY = _coordenadaYGuardada;
     NuevoRect.MostrarRelleno = false;
     NuevoRect.Caracter = '*';
 
@@ -219,8 +224,8 @@ int Utilerias::ObtenerFilas(){
 }
 //Guardar coordenadas actuales en las variables.
 void Utilerias::GuardarCoordenadasActuales(){
-    CoordenadaXGuardada = ObtenerCoordenadaX();
-    CoordenadaYGuardada = ObtenerCoordenadaY();
+    _coordenadaXGuardada = ObtenerCoordenadaX();
+    _coordenadaYGuardada = ObtenerCoordenadaY();
 }
 //Simular tecla
 void Utilerias::SimularTecla(WORD Tecla){
@@ -237,4 +242,17 @@ void Utilerias::SimularTecla(WORD Tecla){
     Entrada.ki.dwFlags = 0;
     //Enviar la tencla a ser presionada.
     SendInput(1, &Entrada, sizeof(INPUT));
+}
+
+Cuadrado Utilerias::ObtenerUltimoCuadrado(){
+    return _ultimoCuadrado;
+}
+Circulo Utilerias::ObtenerUltimoCirculo(){
+    return _ultimoCirculo;
+}
+Triangulo Utilerias::ObtenerUltimoTriangulo(){
+    return _ultimoTriangulo;
+}
+Rectangulo Utilerias::ObtenerUltimoRectangulo(){
+    return _ultimoRectangulo;
 }

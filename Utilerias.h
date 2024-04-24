@@ -3,6 +3,7 @@
 #include <string>
 #include "TamanoPantalla.h"
 #include <windows.h>
+#include "Entidades.h"
 
 class Utilerias{
 //Metodos/propiedades publicas.
@@ -37,6 +38,12 @@ public:
     int ObtenerFilas();
     //simular presionar tecla
     void SimularTecla(WORD Tecla);
+    //Retornar ultimas figuras graficadas
+
+    Cuadrado ObtenerUltimoCuadrado();
+    Circulo ObtenerUltimoCirculo();
+    Triangulo ObtenerUltimoTriangulo();
+    Rectangulo ObtenerUltimoRectangulo();
 
 private:
     //Obtener tamaño de pantalla;

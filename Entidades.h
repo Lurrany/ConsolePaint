@@ -33,4 +33,9 @@ struct Triangulo{
     bool MostrarRelleno;
     char Caracter;
 };
+struct PosicionPantalla{
+    int CoordenadaX;
+    int CoordenadaY;
+    char Caracter;
+};
 #endif // ENTIDADES_H
