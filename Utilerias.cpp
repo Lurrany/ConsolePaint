@@ -4,8 +4,10 @@
 #include <windows.h>
 #include "FiguraGeometricaCuadrado.h"
 #include "FiguraGeometricaRectangulo.h"
+#include "FiguraGeometricaTriangulo.h"
+#include "FiguraGeometricaCirculo.h"
 #include "Entidades.h"
-
+#include <list>
 
 using namespace std;
 int _coordenadaXGuardada, _coordenadaYGuardada;
@@ -13,7 +15,36 @@ Cuadrado _ultimoCuadrado;
 Circulo _ultimoCirculo;
 Rectangulo _ultimoRectangulo;
 Triangulo _ultimoTriangulo;
+//variables de coordenadas.
+int _coordenadaX = 0;
+int _coordenadaY = 0;
+//Variables para guardar el tamaño de la pantalla
+int _columnas;
+int _filas;
 
+//Lista de objetos con las coordenada en pantalla
+std::list<PosicionPantalla> _posicionesEnPantalla;
+
+void Utilerias::EscribirEnPantalla(std::string Mensaje){
+    int x = ObtenerCoordenadaX();
+    int y = ObtenerCoordenadaY();
+    for(auto letra:Mensaje){
+            PosicionPantalla pos;
+            pos.CoordenadaX = x;
+            pos.CoordenadaY = y;
+            pos.Caracter = letra;
+            _posicionesEnPantalla.push_back(pos);
+            x++;
+    }
+    cout << Mensaje;
+    MoverACoordenada(x, y);
+}
+void Utilerias::ReescribirEnPantalla(){
+    for(auto CaracterPantalla:_posicionesEnPantalla){
+        MoverACoordenada(CaracterPantalla.CoordenadaX, CaracterPantalla.CoordenadaY);
+        cout << CaracterPantalla.Caracter;
+    }
+}
 //Metodo para imprimir un mensaje.
 void Utilerias::MostrarMensaje(std::string Mensaje, bool SaltoLinea){
     cout << Mensaje << endl;
@@ -99,6 +130,9 @@ int Utilerias::MostrarSubMenuFiguras(){
     cin >> Opcion;
     cin.ignore();
     switch(Opcion){
+    case 1:
+        MostrarSubMenuTriangulo();
+        break;
     case 2:
         MostrarSubMenuCuadro();
         break;
@@ -145,12 +179,28 @@ void Utilerias::MostrarSubMenuRectangulo(){
     Rectangulo.ImprimirRectangulo(NuevoRect);
 
 }
-void Utilerias::MostrarControles(){
-    cout << "F12: Abrir menu | Esc: Salir | paint 1.0.0";
+void Utilerias::MostrarSubMenuTriangulo(){
+    //Objeto triangulo
+    Triangulo NuevoTri;
+    //Asignar los valores
+    NuevoTri.CoordenadaX = _coordenadaXGuardada;
+    NuevoTri.CoordenadaY = _coordenadaYGuardada;
+    NuevoTri.MostrarRelleno = false;
+    NuevoTri.Caracter = '*';
+
+    //Solicitar la información al usuario
+    MoverCursor(0,1);
+    cout << "Base del triangulo: ";
+    cin >> NuevoTri.Base;
+    cin.ignore();
+
+    FigurageometricaTriangulo Tri;
+    Tri.ImprimirTriangulo(NuevoTri);
 }
-//variables de coordenadas.
-int _coordenadaX = 0;
-int _coordenadaY = 0;
+void Utilerias::MostrarControles(){
+    cout << "F12: Abrir menu | Espacio: borrar | F5: Actualizar | Esc: Salir | paint 1.0.0";
+}
+
 //obtener coordenada x
 int Utilerias::ObtenerCoordenadaX(){
     return _coordenadaX;
@@ -199,9 +249,7 @@ void Utilerias::MoverACoordenada(int PosicionX, int PosicionY){
     //asignar la nueva coordenada.
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CoordenadaNueva);
 }
-//Variables para guardar el tamaño de la pantalla
-int _columnas;
-int _filas;
+//obtener el tamaño de la pantalla actual
 void Utilerias::ObtenerTamanoDePantalla(){
     //buffer de la pantalla
     CONSOLE_SCREEN_BUFFER_INFO csbi;

@@ -42,22 +42,25 @@
 	"../FiguraGeometricaCirculo.h"
 	"../Utilerias.h"
 
-1713935007 c:\users\adele\onedrive\documents\dev\consolepaint\utilerias.h
+1714021438 c:\users\adele\onedrive\documents\dev\consolepaint\utilerias.h
 	<string>
 	"TamanoPantalla.h"
 	<windows.h>
 	"Entidades.h"
 
-1713759656 source:c:\users\adele\onedrive\documents\dev\consolepaint\figurageometrica\figurageometricarectangulo.cpp
+1714019949 source:c:\users\adele\onedrive\documents\dev\consolepaint\figurageometrica\figurageometricarectangulo.cpp
 	<iostream>
 	"../Utilerias.h"
 	"../FiguraGeometricaCuadrado.h"
 	"FiguraGeometricaRectangulo.h"
 
-1713153366 source:c:\users\adele\onedrive\documents\dev\consolepaint\figurageometrica\figurageometricatriangulo.cpp
+1714021173 source:c:\users\adele\onedrive\documents\dev\consolepaint\figurageometrica\figurageometricatriangulo.cpp
+	<iostream>
+	"../Utilerias.h"
+	"../Entidades.h"
 	"FiguraGeometricaTriangulo.h"
 
-1713935633 source:c:\users\adele\onedrive\documents\dev\consolepaint\main.cpp
+1714020747 source:c:\users\adele\onedrive\documents\dev\consolepaint\main.cpp
 	<iostream>
 	<windows.h>
 	"Utilerias.h"
@@ -68,16 +71,19 @@
 	"FiguraGeometricaRectangulo.h"
 	"FiguraGeometricaTriangulo.h"
 
-1713935608 source:c:\users\adele\onedrive\documents\dev\consolepaint\utilerias.cpp
+1714021502 source:c:\users\adele\onedrive\documents\dev\consolepaint\utilerias.cpp
 	"Utilerias.h"
 	<iostream>
 	<string>
 	<windows.h>
 	"FiguraGeometricaCuadrado.h"
 	"FiguraGeometricaRectangulo.h"
+	"FiguraGeometricaTriangulo.h"
+	"FiguraGeometricaCirculo.h"
 	"Entidades.h"
+	<list>
 
-1713759506 source:c:\users\adele\onedrive\documents\dev\consolepaint\figurageometrica\figurageometricacuadrado.cpp
+1714019957 source:c:\users\adele\onedrive\documents\dev\consolepaint\figurageometrica\figurageometricacuadrado.cpp
 	<iostream>
 	"../Utilerias.h"
 	"../FiguraGeometricaCuadrado.h"
@@ -91,7 +97,8 @@
 1713759538 c:\users\adele\onedrive\documents\dev\consolepaint\figurageometricarectangulo.h
 	"Entidades.h"
 
-1713153366 c:\users\adele\onedrive\documents\dev\consolepaint\figurageometricatriangulo.h
+1714021138 c:\users\adele\onedrive\documents\dev\consolepaint\figurageometricatriangulo.h
+	"Entidades.h"
 
 1713236598 source:c:\users\adele\onedrive\documents\dev\consolepaint\entidades\tamanopantalla.cpp
 	"TamanoPantalla.h"
@@ -100,7 +107,7 @@
 
 1713236593 c:\users\adele\onedrive\documents\dev\consolepaint\tamanopantalla.h
 
-1713933765 c:\users\adele\onedrive\documents\dev\consolepaint\entidades.h
+1713936120 c:\users\adele\onedrive\documents\dev\consolepaint\entidades.h
 
 1713760234 source:c:\users\adele\onedrive\documents\dev\consolepaint\entidades.cpp
 	"Entidades.h"

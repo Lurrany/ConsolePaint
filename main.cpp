@@ -16,37 +16,17 @@ std::list<Cuadrado> _cuadros;
 std::list<Circulo> _circulos;
 std::list<Triangulo> _triangulos;
 
-bool Redibujando = false;
-void Redibujar(){
-    if(!Redibujando){
-        Redibujando = true;
-        //Redibular rectangulos
-        for(auto Re:_rectangulos){
-            //llamar a graficar
-            FiguraGeometricaRectangulo FigRectangulo;
-            FigRectangulo.ImprimirRectangulo(Re);
-
-        }
-        //Redibular cuadros
-        for(auto Cu:_cuadros){
-            //llamar a graficar
-            FiguraGeometricaCuadrado FigCuadrado;
-            FigCuadrado.ImprimirCuadrado(Cu);
-        }
-        //Redibular circulos
-        for(auto Ci:_circulos){
-            //llamar a graficar
-            FiguraGeometricaCirculo FigCirculo;
-            //FigCirculo.ImprimirCirculo(Ci);
-
-        }
-        //Redibular triangulos
-        for(auto Re:_triangulos){
-            //llamar a graficar
-        }
-        Redibujando = false;
-    }
-
+void ActualizarPantalla(){
+    //Objeto de utilerias
+    Utilerias Uti;
+    //Eliminar con cls toda la pantalla
+    Uti.LimpiarPantalla();
+    //Mover a 0, 0 para imprimir controles
+    Uti.MoverACoordenada(0,0);
+    //Imprimir controles :D
+    Uti.MostrarControles();
+    //Reescribir la información guardada en la pantalla
+    Uti.ReescribirEnPantalla();
 }
 int main()
 {
@@ -77,48 +57,26 @@ int main()
             Uti.MoverCursor(0, 1);
         }
         if(GetKeyState(VK_F12) & 0X8000){
-            //1 = triangulo
-            //2 = cuadrado
-            //3 = rectangulo
-            //4 = circulo
-            int Op = Uti.MenuPrincipal();
-
-            cout << Op;
-            switch(Op){
-            case 1:
-                //Triangulo
-                Triangulo TriGraficado;
-                TriGraficado = Uti.ObtenerUltimoTriangulo();
-                break;
-            case 2:
-                //Cuadrado
-                Cuadrado CuadradoGraficado;
-                CuadradoGraficado = Uti.ObtenerUltimoCuadrado();
-                break;
-            case 3:
-                //Rectangulo
-                Rectangulo RectanguloGraficado;
-                RectanguloGraficado = Uti.ObtenerUltimoRectangulo();
-                _rectangulos.push_back(RectanguloGraficado);
-                //Redibujar
-                Redibujar();
-                break;
-            case 4:
-                //Circulo
-                Circulo CirculoGraficado;
-                CirculoGraficado = Uti.ObtenerUltimoCirculo();
-                break;
-            }
-
+            //Mostrar el menu para que el usuario ingrese la información.
+            Uti.MenuPrincipal();
+            //Actualizar luego que se grafique
+            ActualizarPantalla();
         }
         if(GetKeyState(VK_ESCAPE) & 0x8000){
+            //Salir
             repetir = false;
         }
         if(GetKeyState(VK_SPACE) & 0x8000){
-            cout << " ";
+            //Borrar caracter en pantalla
+            Uti.EscribirEnPantalla(" ");
         }
         if(GetKeyState('P') & 0x8000){
-
+            //Boton de pruebas
+            Uti.EscribirEnPantalla("Prueba #1");
+        }
+        if(GetKeyState(VK_F5) & 0x8000){
+            //Actualizar pantalla
+            ActualizarPantalla();
         }
 
         DWORD time;

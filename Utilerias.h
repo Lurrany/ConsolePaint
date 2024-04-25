@@ -38,8 +38,11 @@ public:
     int ObtenerFilas();
     //simular presionar tecla
     void SimularTecla(WORD Tecla);
+    //escribir en pantalla
+    void EscribirEnPantalla(std::string Mensaje);
+    //reescribir pantalla
+    void ReescribirEnPantalla();
     //Retornar ultimas figuras graficadas
-
     Cuadrado ObtenerUltimoCuadrado();
     Circulo ObtenerUltimoCirculo();
     Triangulo ObtenerUltimoTriangulo();
@@ -52,6 +55,8 @@ private:
     void MostrarSubMenuCuadro();
     //Submenu de información del rectangulo.
     void MostrarSubMenuRectangulo();
+    //Submenu triangulo
+    void MostrarSubMenuTriangulo();
     //Guardar coordenadas
     void GuardarCoordenadasActuales();
 
