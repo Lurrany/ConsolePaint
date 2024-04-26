@@ -1,8 +1,9 @@
+#include "Entidades.h"
 #ifndef FIGURAGEOMETRICACIRCULO_H
 #define FIGURAGEOMETRICACIRCULO_H
 class FiguraGeometricaCirculo{
 public:
-    void ImprimirCirculo(int x, int y, bool Relleno, char Caracter, float Radio);
+    void ImprimirCirculo(const Circulo& Cir);
 };
 
 

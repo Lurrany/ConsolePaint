@@ -25,23 +25,31 @@ int _filas;
 //Lista de objetos con las coordenada en pantalla
 std::list<PosicionPantalla> _posicionesEnPantalla;
 
-void Utilerias::EscribirEnPantalla(std::string Mensaje){
+void Utilerias::EscribirEnPantalla(std::string Mensaje, bool Borrar){
     int x = ObtenerCoordenadaX();
     int y = ObtenerCoordenadaY();
     for(auto letra:Mensaje){
+            //pasar al otro lado de la pantalla al llegar al borde :D
+            if(x >= ObtenerColumnas()){
+                x = 0;
+            }
+            //objeto con la posicion y el caracter.
             PosicionPantalla pos;
             pos.CoordenadaX = x;
             pos.CoordenadaY = y;
             pos.Caracter = letra;
-            _posicionesEnPantalla.push_back(pos);
-            x++;
+            if(letra != ' ')
+                _posicionesEnPantalla.push_back(pos);
+            else if(letra == ' ' && Borrar)
+                _posicionesEnPantalla.push_back(pos);
+        x++;
     }
     cout << Mensaje;
-    MoverACoordenada(x, y);
+    MoverACoordenada(x, y, true);
 }
 void Utilerias::ReescribirEnPantalla(){
     for(auto CaracterPantalla:_posicionesEnPantalla){
-        MoverACoordenada(CaracterPantalla.CoordenadaX, CaracterPantalla.CoordenadaY);
+        MoverACoordenada(CaracterPantalla.CoordenadaX, CaracterPantalla.CoordenadaY, true);
         cout << CaracterPantalla.Caracter;
     }
 }
@@ -76,6 +84,7 @@ int Utilerias::LeerValorNumerico(std::string Mensaje){
     int ValorIngresadoPorUsuario;
     //leer valor ingresado
     cin >> ValorIngresadoPorUsuario;
+    cin.ignore();
     //retornar el valor ingresado
     return ValorIngresadoPorUsuario;
 }
@@ -139,6 +148,9 @@ int Utilerias::MostrarSubMenuFiguras(){
     case 3:
         MostrarSubMenuRectangulo();
         break;
+    case 4:
+        MostrarSubMenuCirculo();
+        break;
     }
     return Opcion;
 }
@@ -153,6 +165,7 @@ void Utilerias::MostrarSubMenuCuadro(){
     MoverCursor(0,1);
     cout << "Ancho del cuadro: ";
     cin >> NuevoCuadrado.Ancho;
+    cin.ignore();
 
     FiguraGeometricaCuadrado Cuadrado;
     Cuadrado.ImprimirCuadrado(NuevoCuadrado);
@@ -197,6 +210,24 @@ void Utilerias::MostrarSubMenuTriangulo(){
     FigurageometricaTriangulo Tri;
     Tri.ImprimirTriangulo(NuevoTri);
 }
+void Utilerias::MostrarSubMenuCirculo(){
+    //Objeto circulo
+    Circulo NuevoCirculo;
+    //asignar valores
+    NuevoCirculo.CoordenadaX = _coordenadaXGuardada;
+    NuevoCirculo.CoordenadaY = _coordenadaYGuardada;
+    NuevoCirculo.MostrarRelleno = false;
+    NuevoCirculo.Caracter = '*';
+
+    //Solicitar la información al usuario
+    MoverCursor(0, 1);
+    cout << "Ingrese el radio del circulo: ";
+    cin >> NuevoCirculo.Radio;
+    cin.ignore();
+
+    FiguraGeometricaCirculo Cir;
+    Cir.ImprimirCirculo(NuevoCirculo);
+}
 void Utilerias::MostrarControles(){
     cout << "F12: Abrir menu | Espacio: borrar | F5: Actualizar | Esc: Salir | paint 1.0.0";
 }
@@ -240,12 +271,39 @@ void Utilerias::MoverCursor(int PosicionX, int PosicionY){
     //asignar la nueva coordenada.
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CoordenadaNueva);
 }
-void Utilerias::MoverACoordenada(int PosicionX, int PosicionY){
+void Utilerias::MoverACoordenada(int PosicionX, int PosicionY, bool PermitirCero){
+    //Asignar nuevos valores a las variables de coordenada para guardar la posicio.
+    if(PosicionX != 0)
+        _coordenadaX = PosicionX;
+    if(PosicionY != 0)
+        _coordenadaY = PosicionY;
+    if(PermitirCero){
+        _coordenadaX = PosicionX;
+        _coordenadaY = PosicionY;
+    }
+    //verificar que el cursor no salga de la pantalla :D
+    //verificar coordenada x
+    if(_coordenadaX >= ObtenerColumnas()){
+        _coordenadaX = 0;
+        //_coordenadaY ;
+    }
+    else if(_coordenadaX < 0){
+        _coordenadaX = ObtenerColumnas();
+        //_coordenadaY--;
+    }
+    //verificar coordenada y
+    if(_coordenadaY >= ObtenerFilas()){
+        _coordenadaY = 0;
+        //_coordenadaX ++;
+    }
+    else if(_coordenadaY < 0){
+        //_coordenadaX--;
+        _coordenadaY = ObtenerFilas()-1;
+    }
     COORD CoordenadaNueva;
-    CoordenadaNueva.X = PosicionX;
-    CoordenadaNueva.Y = PosicionY;
-    _coordenadaX = PosicionX;
-    _coordenadaY = PosicionY;
+    CoordenadaNueva.X = _coordenadaX;
+    CoordenadaNueva.Y = _coordenadaY;
+
     //asignar la nueva coordenada.
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CoordenadaNueva);
 }

@@ -10,11 +10,6 @@
 
 
 using namespace std;
-//listas con las figuras graficadas.
-std::list<Rectangulo> _rectangulos;
-std::list<Cuadrado> _cuadros;
-std::list<Circulo> _circulos;
-std::list<Triangulo> _triangulos;
 
 void ActualizarPantalla(){
     //Objeto de utilerias
@@ -22,7 +17,7 @@ void ActualizarPantalla(){
     //Eliminar con cls toda la pantalla
     Uti.LimpiarPantalla();
     //Mover a 0, 0 para imprimir controles
-    Uti.MoverACoordenada(0,0);
+    Uti.MoverACoordenada(0,0, true);
     //Imprimir controles :D
     Uti.MostrarControles();
     //Reescribir la información guardada en la pantalla
@@ -38,12 +33,13 @@ int main()
     //Declarar matriz de pantalla luego de maximizar
     int Pantalla[Uti.ObtenerFilas()][Uti.ObtenerCoordenadaX()];
     Uti.MostrarControles();
-    Uti.MoverACoordenada(10, 10);
+    Uti.MoverACoordenada(10, 10, false);
     //std::string textoIngresado = Uti.LeerValorTexto("Ingrese un texto",100);
     //Uti.MostrarMensaje(textoIngresado, false);
     ShowCursor(true);
     bool repetir = true;
     while(repetir){
+
         if((GetKeyState(VK_LEFT) & 0x8000) || (GetKeyState('A') & 0x8000)){
             Uti.MoverCursor(-1,0);
         }
@@ -57,6 +53,8 @@ int main()
             Uti.MoverCursor(0, 1);
         }
         if(GetKeyState(VK_F12) & 0X8000){
+            //Limpiar buffer
+            cin.clear();
             //Mostrar el menu para que el usuario ingrese la información.
             Uti.MenuPrincipal();
             //Actualizar luego que se grafique
@@ -68,17 +66,18 @@ int main()
         }
         if(GetKeyState(VK_SPACE) & 0x8000){
             //Borrar caracter en pantalla
-            Uti.EscribirEnPantalla(" ");
+            Uti.EscribirEnPantalla(" ", true);
         }
         if(GetKeyState('P') & 0x8000){
             //Boton de pruebas
-            Uti.EscribirEnPantalla("Prueba #1");
+            Uti.EscribirEnPantalla("Prueba #1", false);
         }
         if(GetKeyState(VK_F5) & 0x8000){
             //Actualizar pantalla
             ActualizarPantalla();
         }
-
+        //Evitar que se guarden las teclas presionadas en buffer :|
+        Uti.SimularTecla(VK_BACK);
         DWORD time;
         time = 65;
         Sleep(time);

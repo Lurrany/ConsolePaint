@@ -11,7 +11,7 @@ void FiguraGeometricaCuadrado::ImprimirCuadrado(const Cuadrado& Cuadro){
     int x = Cuadro.CoordenadaX;
     int y = Cuadro.CoordenadaY;
     //mover el cursor a la coordenada indicada.
-    Uti.MoverACoordenada(Cuadro.CoordenadaX, Cuadro.CoordenadaY);
+    Uti.MoverACoordenada(Cuadro.CoordenadaX, Cuadro.CoordenadaY, true);
     char Pantalla[Cuadro.Ancho][Cuadro.Ancho];
     //array con la información la linea del cuadro
     for(int c = 0; c < Cuadro.Ancho; c++){
@@ -34,9 +34,10 @@ void FiguraGeometricaCuadrado::ImprimirCuadrado(const Cuadrado& Cuadro){
             Linea += Pantalla[c][i];
         }
         //escribir en pantalla la información de la linea e ingresarlo en la lista que guarda el estado de la pantalla :D
-        Uti.EscribirEnPantalla(Linea);
+        Uti.EscribirEnPantalla(Linea, false);
         y++;
-        Uti.MoverACoordenada(x, y);
+        Uti.MoverACoordenada(x,0, false);
+        Uti.MoverCursor(0,1);
     }
 
 }

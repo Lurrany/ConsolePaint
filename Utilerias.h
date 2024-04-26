@@ -25,7 +25,7 @@ public:
     //mover cursor
     void MoverCursor(int PosicionX, int PosicionY);
     //establecer nueva posicion en pantalla
-    void MoverACoordenada(int PosicionX, int PosicionY);
+    void MoverACoordenada(int PosicionX, int PosicionY, bool ACeroCero);
     //leyenda con los controles
     void MostrarControles();
     //Obtener coordenada x
@@ -39,7 +39,7 @@ public:
     //simular presionar tecla
     void SimularTecla(WORD Tecla);
     //escribir en pantalla
-    void EscribirEnPantalla(std::string Mensaje);
+    void EscribirEnPantalla(std::string Mensaje, bool Borrar);
     //reescribir pantalla
     void ReescribirEnPantalla();
     //Retornar ultimas figuras graficadas
@@ -57,6 +57,7 @@ private:
     void MostrarSubMenuRectangulo();
     //Submenu triangulo
     void MostrarSubMenuTriangulo();
+    void MostrarSubMenuCirculo();
     //Guardar coordenadas
     void GuardarCoordenadasActuales();
 
