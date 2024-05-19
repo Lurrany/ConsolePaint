@@ -25,7 +25,7 @@ void ActualizarPantalla(){
 }
 int main()
 {
-    //Clase de utilerias
+    //la clase utilerias hace todo el trabajo :D
     Utilerias Uti;
     //Simular tecla f11 para poner en pantalla completa :D
     Uti.SimularTecla(VK_F11);
