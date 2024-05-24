@@ -32,16 +32,16 @@ void FigurageometricaTriangulo::ImprimirTriangulo(const Triangulo& Tri){
         while (i != 2 * c - 1) {
             //verificar que el caracter puesto sea del inicio del ttriangulo o este dentro del perimetro. para solo trazar el borde
             if(CaracterPuesto == 0 || (CaracterPuesto +1) == (2 * c - 1)){
-                Linea += "*";
+                Linea += Tri.Caracter;
             }
             //verificar si es la parte de abajo del triangulo y trazarlo
             else if(c== Tri.Base){
-                Linea+="*";
+                Linea+=Tri.Caracter;
             }
             //si mostrar el relleno, se trazara todo.
             else{
                 if(Tri.MostrarRelleno)
-                    Linea += "*";
+                    Linea += Tri.Caracter;
                 else
                     Linea += " ";
 

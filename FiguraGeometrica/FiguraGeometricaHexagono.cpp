@@ -1,11 +1,9 @@
 #include "FiguraGeometricaHexagono.h"
+#include <iostream>
+#include "../Entidades.h"
 
-FiguraGeometricaHexagono::FiguraGeometricaHexagono()
-{
-    //ctor
-}
+using namespace std;
 
-FiguraGeometricaHexagono::~FiguraGeometricaHexagono()
-{
-    //dtor
+void FiguraGeometricaHexagono::ImprimirHexagono(const Hexagono& Hexa){
+
 }

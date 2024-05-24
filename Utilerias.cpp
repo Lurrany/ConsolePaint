@@ -6,6 +6,7 @@
 #include "FiguraGeometricaRectangulo.h"
 #include "FiguraGeometricaTriangulo.h"
 #include "FiguraGeometricaCirculo.h"
+#include "FiguraGeometricaLinea.h"
 #include "Entidades.h"
 #include <list>
 
@@ -21,13 +22,31 @@ int _coordenadaY = 0;
 //Variables para guardar el tamaño de la pantalla
 int _columnas;
 int _filas;
-
+//Caracter para escribir e iniciarlo en *
+char _caracterDibujo = '*';
+//Color de los caracteres:
+int _colorCaracteres = 15; //iniciar el color principal en blanco :D
+const int _colorTextoBlanco = 15;
 //Lista de objetos con las coordenada en pantalla
 std::list<PosicionPantalla> _posicionesEnPantalla;
 
+//procedimiento para cambiar el color
+void Utilerias::CambiarColor(int Color){
+    //Obtener el output de la consola
+    HANDLE  hConsole;
+    hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    //colocar el buffer
+    FlushConsoleInputBuffer(hConsole);
+    //asignar el color :D
+    SetConsoleTextAttribute(hConsole, Color);
+}
 void Utilerias::EscribirEnPantalla(std::string Mensaje, bool Borrar){
     int x = ObtenerCoordenadaX();
     int y = ObtenerCoordenadaY();
+    //cambiar color del texto de la consola antes de graficar
+    if(_colorCaracteres != 0){ // verificar que se escogiera un color
+            CambiarColor(_colorCaracteres);
+    }
     for(auto letra:Mensaje){
             //pasar al otro lado de la pantalla al llegar al borde :D
             if(x >= ObtenerColumnas()){
@@ -38,6 +57,7 @@ void Utilerias::EscribirEnPantalla(std::string Mensaje, bool Borrar){
             pos.CoordenadaX = x;
             pos.CoordenadaY = y;
             pos.Caracter = letra;
+            pos.Color = _colorCaracteres;
             if(letra != ' ')
                 _posicionesEnPantalla.push_back(pos);
             else if(letra == ' ' && Borrar)
@@ -46,12 +66,21 @@ void Utilerias::EscribirEnPantalla(std::string Mensaje, bool Borrar){
     }
     cout << Mensaje;
     MoverACoordenada(x, y, true);
+
+    //Revertir el cambio de color :D
+    CambiarColor(_colorTextoBlanco);
 }
 void Utilerias::ReescribirEnPantalla(){
+    //Recorrer todos los caracteres que estan en la lista de caracteres graficados :D
     for(auto CaracterPantalla:_posicionesEnPantalla){
+        //Mover a la coordenada que indique el caracter
         MoverACoordenada(CaracterPantalla.CoordenadaX, CaracterPantalla.CoordenadaY, true);
+        //cambiar el color del caracter antes de escribirlo en la pantalla
+        CambiarColor(CaracterPantalla.Color);
         cout << CaracterPantalla.Caracter;
     }
+    //al terminar cambiar el color al color blanco.
+    CambiarColor(_colorTextoBlanco);
 }
 //Metodo para imprimir un mensaje.
 void Utilerias::MostrarMensaje(std::string Mensaje, bool SaltoLinea){
@@ -155,13 +184,14 @@ int Utilerias::MostrarSubMenuFiguras(){
     return Opcion;
 }
 void Utilerias::MostrarSubMenuCuadro(){
+    GuardarCoordenadasActuales();
     //objeto cuadrado
     Cuadrado NuevoCuadrado;
     //Asignar Valores al objeto :D
     NuevoCuadrado.CoordenadaX = _coordenadaXGuardada;
     NuevoCuadrado.CoordenadaY = _coordenadaYGuardada;
     NuevoCuadrado.MostrarRelleno = false;
-    NuevoCuadrado.Caracter = '*';
+    NuevoCuadrado.Caracter = _caracterDibujo;
     MoverCursor(0,1);
     cout << "Ancho del cuadro: ";
     cin >> NuevoCuadrado.Ancho;
@@ -171,13 +201,14 @@ void Utilerias::MostrarSubMenuCuadro(){
     Cuadrado.ImprimirCuadrado(NuevoCuadrado);
 }
 void Utilerias::MostrarSubMenuRectangulo(){
+    GuardarCoordenadasActuales();
     //Objeto Rectangulo
     Rectangulo NuevoRect;
     //asignar valores al objeto
     NuevoRect.CoordenadaX = _coordenadaXGuardada;
     NuevoRect.CoordenadaY = _coordenadaYGuardada;
     NuevoRect.MostrarRelleno = false;
-    NuevoRect.Caracter = '*';
+    NuevoRect.Caracter = _caracterDibujo;
 
     MoverCursor(0,1);
     cout << "Ancho del rectangulo: ";
@@ -193,13 +224,14 @@ void Utilerias::MostrarSubMenuRectangulo(){
 
 }
 void Utilerias::MostrarSubMenuTriangulo(){
+    GuardarCoordenadasActuales();
     //Objeto triangulo
     Triangulo NuevoTri;
     //Asignar los valores
     NuevoTri.CoordenadaX = _coordenadaXGuardada;
     NuevoTri.CoordenadaY = _coordenadaYGuardada;
     NuevoTri.MostrarRelleno = false;
-    NuevoTri.Caracter = '*';
+    NuevoTri.Caracter = _caracterDibujo;
 
     //Solicitar la información al usuario
     MoverCursor(0,1);
@@ -211,13 +243,14 @@ void Utilerias::MostrarSubMenuTriangulo(){
     Tri.ImprimirTriangulo(NuevoTri);
 }
 void Utilerias::MostrarSubMenuCirculo(){
+    GuardarCoordenadasActuales();
     //Objeto circulo
     Circulo NuevoCirculo;
     //asignar valores
     NuevoCirculo.CoordenadaX = _coordenadaXGuardada;
     NuevoCirculo.CoordenadaY = _coordenadaYGuardada;
     NuevoCirculo.MostrarRelleno = false;
-    NuevoCirculo.Caracter = '*';
+    NuevoCirculo.Caracter = _caracterDibujo;
 
     //Solicitar la información al usuario
     MoverCursor(0, 1);
@@ -228,8 +261,68 @@ void Utilerias::MostrarSubMenuCirculo(){
     FiguraGeometricaCirculo Cir;
     Cir.ImprimirCirculo(NuevoCirculo);
 }
+void Utilerias::MostrarSubMenuRombo(){
+    //Guardar coordenadas para dibujar el rombo
+    GuardarCoordenadasActuales();
+    //Objeto rombo
+    Rombo NuevoRombo;
+
+}
+void Utilerias::MostrarSubMenuLinea(){
+    //Guardar coordenadas para dibujar el rombo
+    //Ya no recuerdo para que se guardaban las coordenadas :(
+    GuardarCoordenadasActuales();
+    //Objeto linea
+    Linea Lin;
+    //Solicitar la información al usuario
+    cout << "Indique la longitud de la linea: ";
+    cin >> Lin.Longitud;
+    cin.ignore();
+
+    int Direccion;
+    cout << "Indique la direccion 1 = vertical | 2 = horizontal " << endl;
+    cout << " 3 = inclidado a la derecha | 4 = inclinado a la izquierda: ";
+    cin >> Direccion;
+    cin.ignore();
+
+    switch(Direccion){
+        case 1:
+            Lin.Vertical = true;
+            Lin.Horizontal = false;
+            Lin.InclinacionDerecha = false;
+            Lin.InclinacionIzquierda = false;
+            break;
+        case 2:
+            Lin.Vertical = false;
+            Lin.Horizontal = true;
+            Lin.InclinacionDerecha = false;
+            Lin.InclinacionIzquierda = false;
+            break;
+        case 3:
+            Lin.Vertical = false;
+            Lin.Horizontal = false;
+            Lin.InclinacionDerecha = true;
+            Lin.InclinacionIzquierda = false;
+            break;
+        case 4:
+            Lin.Vertical = false;
+            Lin.Horizontal = false;
+            Lin.InclinacionDerecha = false;
+            Lin.InclinacionIzquierda = true;
+            break;
+    }
+    Lin.Caracter = _caracterDibujo;
+    Lin.CoordenadaX = _coordenadaXGuardada;
+    Lin.CoordenadaY = _coordenadaYGuardada;
+
+    //Objeto para graficar la linea
+    FiguraGeometricaLinea NuevaLinea;
+    NuevaLinea.ImprimirLinea(Lin);
+
+}
 void Utilerias::MostrarControles(){
-    cout << "F12: Abrir menu | Espacio: borrar | F5: Actualizar | Esc: Salir | paint 1.0.0";
+    cout << "F1: Triangulo | F2: Cuadrado | F3: Rectangulo | F4: Circulo | F5: Linea | F6: Rombo | F7: Hexagono | F8: Nuevo Caracter" << endl;
+    cout << "F9: Limpiar Pantalla | F10: Color de Caracter | F12: Grabar Pantalla | Ctrl+A: Abrir archivo |Esc: Salir | paint 1.5.0";
 }
 
 //obtener coordenada x
@@ -350,6 +443,43 @@ void Utilerias::SimularTecla(WORD Tecla){
     SendInput(1, &Entrada, sizeof(INPUT));
 }
 
+//Obtener el caracter de dibujo actual.
+char Utilerias::ObtenerCaracterDibujo(){
+    cout << "EL caracter para graficar actual es: " << _caracterDibujo;
+    return _caracterDibujo;
+}
+//Asignar un nuevo caracter para dibujar
+void Utilerias::AsignarCaracterDibujo(){
+    cout << "Ingrese el nuevo caracter para graficar: ";
+    cin >>_caracterDibujo;
+}
+
+//Cambiar el color
+void Utilerias::CambiarColor(){
+    int Opcion;
+    cout << "Seleccione un color para el texto(1=Rojo, 2=Azul, 3=Verde, 4=Personalizado): ";
+    cin >> Opcion;
+    cin.ignore();
+
+    switch(Opcion){
+        case 1:
+            _colorCaracteres = FOREGROUND_RED;
+            break;
+        case 2:
+            _colorCaracteres = FOREGROUND_BLUE;
+            break;
+        case 3:
+            _colorCaracteres = FOREGROUND_GREEN;
+            break;
+        case 4:
+            cout << "Ingrese el codigo de color: ";
+            cin >> _caracterDibujo;
+            cin.ignore();
+            break;
+    }
+}
+
+//Esto ya no lo use, la idea era tener un registro de cada una de las ultimas figuras graficadas, no fue necesario al final :D
 Cuadrado Utilerias::ObtenerUltimoCuadrado(){
     return _ultimoCuadrado;
 }

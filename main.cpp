@@ -7,29 +7,20 @@
 #include "FiguraGeometricaCuadrado.h"
 #include "FiguraGeometricaRectangulo.h"
 #include "FiguraGeometricaTriangulo.h"
+#include "FiguraGeometricaRombo.h"
+#include "FiguraGeometricaHexagono.h"
 
 
 using namespace std;
 
-void ActualizarPantalla(){
-    //Objeto de utilerias
-    Utilerias Uti;
-    //Eliminar con cls toda la pantalla
-    Uti.LimpiarPantalla();
-    //Mover a 0, 0 para imprimir controles
-    Uti.MoverACoordenada(0,0, true);
-    //Imprimir controles :D
-    Uti.MostrarControles();
-    //Reescribir la información guardada en la pantalla
-    Uti.ReescribirEnPantalla();
-}
+void ActualizarPantalla();
+
 int main()
 {
     //la clase utilerias hace todo el trabajo :D
     Utilerias Uti;
     //Simular tecla f11 para poner en pantalla completa :D
     Uti.SimularTecla(VK_F11);
-
     //Declarar matriz de pantalla luego de maximizar
     int Pantalla[Uti.ObtenerFilas()][Uti.ObtenerCoordenadaX()];
     Uti.MostrarControles();
@@ -38,8 +29,14 @@ int main()
     //Uti.MostrarMensaje(textoIngresado, false);
     ShowCursor(true);
     bool repetir = true;
-    while(repetir){
 
+
+    while(repetir){
+        //Elimiar caracteres que se colocan al presionar algun F
+        Uti.SimularTecla(VK_BACK);
+        Uti.SimularTecla(VK_BACK);
+        Uti.SimularTecla(VK_BACK);
+        //Movimiento
         if((GetKeyState(VK_LEFT) & 0x8000) || (GetKeyState('A') & 0x8000)){
             Uti.MoverCursor(-1,0);
         }
@@ -52,7 +49,54 @@ int main()
         if((GetKeyState(VK_DOWN) & 0x8000) || (GetKeyState('S') & 0x8000)){
             Uti.MoverCursor(0, 1);
         }
-        if(GetKeyState(VK_F12) & 0X8000){
+        //Opciones del menu
+        //Triangulo
+        if(GetKeyState(VK_F1) & 0x8000){
+            Uti.MostrarSubMenuTriangulo();
+            //Actualizar luego que se grafique
+            ActualizarPantalla();
+        }
+        //Cuadrado
+        else if(GetKeyState(VK_F2) & 0x8000){
+            Uti.MostrarSubMenuCuadro();
+            //Actualizar luego que se grafique
+            ActualizarPantalla();
+        }
+        //Rectangulo
+        else if(GetKeyState(VK_F3) & 0x8000){
+            Uti.MostrarSubMenuRectangulo();
+            //Actualizar luego que se grafique
+            ActualizarPantalla();
+        }
+        //Circulo
+        else if(GetKeyState(VK_F4) & 0x8000){
+            Uti.MostrarSubMenuCirculo();
+            //Actualizar luego que se grafique
+            ActualizarPantalla();
+        }
+        //Linea
+        else if(GetKeyState(VK_F5) & 0x8000){
+            Uti.MostrarSubMenuLinea();
+            ActualizarPantalla();
+        }
+        else if(GetKeyState(VK_F8) & 0x8000){
+            //Cambiar caracter para graficar
+            Uti.AsignarCaracterDibujo();
+            ActualizarPantalla();
+        }
+        else if(GetKeyState(VK_F9) & 0x8000){
+            //Limpiar pantalla
+            Uti.LimpiarPantalla();
+            //Imprimir controles de nuevo
+            Uti.MostrarControles();
+        }
+        else if(GetKeyState(VK_F10) & 0x8000){
+            //Llamar al procedimiento para cambiar el color :D
+            Uti.CambiarColor();
+            //Borrar todo en pantalla y dibujar todo de nuevo.
+            ActualizarPantalla();
+        }
+        else if(GetKeyState(VK_F12) & 0X8000){
             //Limpiar buffer
             cin.clear();
             //Mostrar el menu para que el usuario ingrese la información.
@@ -60,27 +104,42 @@ int main()
             //Actualizar luego que se grafique
             ActualizarPantalla();
         }
-        if(GetKeyState(VK_ESCAPE) & 0x8000){
+        else if(GetKeyState(VK_ESCAPE) & 0x8000){
             //Salir
             repetir = false;
         }
-        if(GetKeyState(VK_SPACE) & 0x8000){
+        /*if(GetKeyState(VK_SPACE) & 0x8000){
             //Borrar caracter en pantalla
             Uti.EscribirEnPantalla(" ", true);
-        }
+        }*/
         if(GetKeyState('P') & 0x8000){
-            //Boton de pruebas
-            Uti.EscribirEnPantalla("Prueba #1", false);
+
+            HANDLE  hConsole;
+            hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            //colocar el buffer
+            FlushConsoleInputBuffer(hConsole);
+            //asignar el color :D
+            SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
         }
-        if(GetKeyState(VK_F5) & 0x8000){
-            //Actualizar pantalla
-            ActualizarPantalla();
-        }
-        //Evitar que se guarden las teclas presionadas en buffer :|
-        Uti.SimularTecla(VK_BACK);
+
         DWORD time;
         time = 65;
         Sleep(time);
     }
     return 0;
+}
+
+void ActualizarPantalla(){
+    //Objeto de utilerias
+    Utilerias Uti;
+    //Eliminar con cls toda la pantalla
+    Uti.LimpiarPantalla();
+    //Mover a 0, 0 para imprimir controles
+    Uti.MoverACoordenada(0,0, true);
+    //Imprimir controles :D
+    Uti.MostrarControles();
+    //Reescribir la información guardada en la pantalla
+    Uti.ReescribirEnPantalla();
+
+    cin.clear();
 }

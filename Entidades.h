@@ -33,9 +33,34 @@ struct Triangulo{
     bool MostrarRelleno;
     char Caracter;
 };
+struct Linea{
+    int CoordenadaX;
+    int CoordenadaY;
+    int Longitud;
+    char Caracter;
+    bool Horizontal;
+    bool Vertical;
+    bool InclinacionDerecha;
+    bool InclinacionIzquierda;
+};
+struct Rombo{
+    int CoordenadaX;
+    int CoordenadaY;
+    int Base;
+    bool MostrarRelleno;
+    char Caracter;
+};
+struct Hexagono{
+    int CoordenadaX;
+    int CoordenadaY;
+    int Base;
+    bool MostrarRelleno;
+    char Caracter;
+};
 struct PosicionPantalla{
     int CoordenadaX;
     int CoordenadaY;
     char Caracter;
+    int Color;
 };
 #endif // ENTIDADES_H

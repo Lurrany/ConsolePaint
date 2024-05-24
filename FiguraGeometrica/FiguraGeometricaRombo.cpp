@@ -1,11 +1,9 @@
 #include "FiguraGeometricaRombo.h"
+#include "../Entidades.h"
+#include <iostream>
 
-FiguraGeometricaRombo::FiguraGeometricaRombo()
-{
-    //ctor
-}
+using namespace std;
 
-FiguraGeometricaRombo::~FiguraGeometricaRombo()
-{
-    //dtor
+void FiguraGeometricaRombo::ImprimirRombo(const Rombo& Rom){
+
 }

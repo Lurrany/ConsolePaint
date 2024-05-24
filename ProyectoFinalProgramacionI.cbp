@@ -16,6 +16,7 @@
 					<Add directory="../ProyectoFinalProgramacionI" />
 					<Add directory="include" />
 					<Add directory="../ConsolePaint" />
+					<Add directory="./" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -28,6 +29,7 @@
 					<Add directory="../ProyectoFinalProgramacionI" />
 					<Add directory="include" />
 					<Add directory="../ConsolePaint" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -42,11 +44,17 @@
 		<Unit filename="Entidades.h" />
 		<Unit filename="FiguraGeometricaCirculo.h" />
 		<Unit filename="FiguraGeometricaCuadrado.h" />
+		<Unit filename="FiguraGeometricaHexagono.h" />
+		<Unit filename="FiguraGeometricaLinea.h" />
 		<Unit filename="FiguraGeometricaRectangulo.h" />
+		<Unit filename="FiguraGeometricaRombo.h" />
 		<Unit filename="FiguraGeometricaTriangulo.h" />
 		<Unit filename="FiguraGeometrica/FiguraGeometricaCirculo.cpp" />
 		<Unit filename="FiguraGeometrica/FiguraGeometricaCuadrado.cpp" />
+		<Unit filename="FiguraGeometrica/FiguraGeometricaHexagono.cpp" />
+		<Unit filename="FiguraGeometrica/FiguraGeometricaLinea.cpp" />
 		<Unit filename="FiguraGeometrica/FiguraGeometricaRectangulo.cpp" />
+		<Unit filename="FiguraGeometrica/FiguraGeometricaRombo.cpp" />
 		<Unit filename="FiguraGeometrica/FiguraGeometricaTriangulo.cpp" />
 		<Unit filename="Utilerias.cpp" />
 		<Unit filename="Utilerias.h" />

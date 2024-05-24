@@ -1,13 +1,11 @@
 #ifndef FIGURAGEOMETRICAROMBO_H
 #define FIGURAGEOMETRICAROMBO_H
-
+#include "Entidades.h"
 
 class FiguraGeometricaRombo
 {
     public:
-        FiguraGeometricaRombo();
-        virtual ~FiguraGeometricaRombo();
-
+        void ImprimirRombo(const Rombo& Rom);
     protected:
 
     private:

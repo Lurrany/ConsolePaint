@@ -1,12 +1,12 @@
 #ifndef FIGURAGEOMETRICAHEXAGONO_H
 #define FIGURAGEOMETRICAHEXAGONO_H
+#include "Entidades.h"
 
 
 class FiguraGeometricaHexagono
 {
     public:
-        FiguraGeometricaHexagono();
-        virtual ~FiguraGeometricaHexagono();
+        void ImprimirHexagono(const Hexagono& Hexa);
 
     protected:
 

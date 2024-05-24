@@ -1,12 +1,11 @@
 #ifndef FIGURAGEOMETRICALINEA_H
 #define FIGURAGEOMETRICALINEA_H
-
+#include "Entidades.h"
 
 class FiguraGeometricaLinea
 {
     public:
-        FiguraGeometricaLinea();
-        virtual ~FiguraGeometricaLinea();
+        void ImprimirLinea(const Linea& Lin);
 
     protected:
 

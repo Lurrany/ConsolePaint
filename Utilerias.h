@@ -42,6 +42,28 @@ public:
     void EscribirEnPantalla(std::string Mensaje, bool Borrar);
     //reescribir pantalla
     void ReescribirEnPantalla();
+    //procedimiento para cambiar el color del texto
+    void CambiarColor();
+
+
+    //Submenus
+    void MostrarSubMenuCuadro();
+    //Submenu de información del rectangulo.
+    void MostrarSubMenuRectangulo();
+    //Submenu triangulo
+    void MostrarSubMenuTriangulo();
+    //Submenu circulo
+    void MostrarSubMenuCirculo();
+    //Submenu rombo
+    void MostrarSubMenuRombo();
+    //Sub menu de linea
+    void MostrarSubMenuLinea();
+
+    //Gestión del caracter para dibujo
+    //Obtener el caracter
+    char ObtenerCaracterDibujo();
+    //Asignar caracter
+    void AsignarCaracterDibujo();
     //Retornar ultimas figuras graficadas
     Cuadrado ObtenerUltimoCuadrado();
     Circulo ObtenerUltimoCirculo();
@@ -52,14 +74,11 @@ private:
     //Obtener tamaño de pantalla;
     void ObtenerTamanoDePantalla();
     //Submenu de infromación del cuadro
-    void MostrarSubMenuCuadro();
-    //Submenu de información del rectangulo.
-    void MostrarSubMenuRectangulo();
-    //Submenu triangulo
-    void MostrarSubMenuTriangulo();
-    void MostrarSubMenuCirculo();
+
     //Guardar coordenadas
     void GuardarCoordenadasActuales();
+    //Procedimiento para cambiar el color
+    void CambiarColor(int Color);
 
 };
 #endif // UTILERIAS_H
