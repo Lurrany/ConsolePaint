@@ -7,6 +7,8 @@
 #include "FiguraGeometricaTriangulo.h"
 #include "FiguraGeometricaCirculo.h"
 #include "FiguraGeometricaLinea.h"
+#include "FiguraGeometricaRombo.h"
+#include "FiguraGeometricaHexagono.h"
 #include "Entidades.h"
 #include <list>
 
@@ -262,11 +264,22 @@ void Utilerias::MostrarSubMenuCirculo(){
     Cir.ImprimirCirculo(NuevoCirculo);
 }
 void Utilerias::MostrarSubMenuRombo(){
-    //Guardar coordenadas para dibujar el rombo
+    //Guardar las coordenadas
     GuardarCoordenadasActuales();
     //Objeto rombo
     Rombo NuevoRombo;
+    //Asignar valores
+    NuevoRombo.CoordenadaX = _coordenadaXGuardada;
+    NuevoRombo.CoordenadaY = _coordenadaYGuardada;
+    NuevoRombo.Caracter = _caracterDibujo;
 
+    //Solicitar la información al usuario
+    cout << "Ingrese la longitud de los lados: ";
+    cin >> NuevoRombo.Base;
+    cin.ignore();
+
+    FiguraGeometricaRombo Rom;
+    Rom.ImprimirRombo(NuevoRombo);
 }
 void Utilerias::MostrarSubMenuLinea(){
     //Guardar coordenadas para dibujar el rombo
@@ -319,6 +332,24 @@ void Utilerias::MostrarSubMenuLinea(){
     FiguraGeometricaLinea NuevaLinea;
     NuevaLinea.ImprimirLinea(Lin);
 
+}
+void Utilerias::MostrarSubMenuHexagono(){
+     //Guardar las coordenadas
+    GuardarCoordenadasActuales();
+    //Objeto rombo
+    Hexagono NuevoHexagono;
+    //Asignar valores
+    NuevoHexagono.CoordenadaX = _coordenadaXGuardada;
+    NuevoHexagono.CoordenadaY = _coordenadaYGuardada;
+    NuevoHexagono.Caracter = _caracterDibujo;
+
+    //Solicitar la información al usuario
+    cout << "Ingrese la longitud de los lados: ";
+    cin >> NuevoHexagono.Base;
+    cin.ignore();
+
+    FiguraGeometricaHexagono Hexa;
+    Hexa.ImprimirHexagono(NuevoHexagono);
 }
 void Utilerias::MostrarControles(){
     cout << "F1: Triangulo | F2: Cuadrado | F3: Rectangulo | F4: Circulo | F5: Linea | F6: Rombo | F7: Hexagono | F8: Nuevo Caracter" << endl;
@@ -477,6 +508,10 @@ void Utilerias::CambiarColor(){
             cin.ignore();
             break;
     }
+}
+//Elimiar registros de pantalla
+void Utilerias::EliminarRegistrosDePantalla(){
+    _posicionesEnPantalla.clear();
 }
 
 //Esto ya no lo use, la idea era tener un registro de cada una de las ultimas figuras graficadas, no fue necesario al final :D

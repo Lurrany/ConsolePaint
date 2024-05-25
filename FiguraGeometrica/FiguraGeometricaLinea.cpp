@@ -39,3 +39,36 @@ void FiguraGeometricaLinea::ImprimirLinea(const Linea& Lin){
         }
     }
 }
+
+void FiguraGeometricaLinea::ImprimirLinea(int Ix, int Iy, int Fx, int Fy, char Caracter, int Longitud){
+     //clase utilerias
+    Utilerias Uti;
+    //Coordenadas iniciales
+
+    //Moverse a la coordenada necesaria en la pantalla.
+    Uti.MoverACoordenada(Ix,Iy, true);
+
+
+    for(int c = 0; c < Longitud; c++){
+        //variable de linea de texto a imprimir
+        string Li;
+        Li += Caracter;
+        //imprimir el primer caracter
+        Uti.EscribirEnPantalla(Li, false);
+
+        //mover hacia a la nueva dirección
+        if(Ix < Fx){
+            Uti.MoverCursor(1,0);
+        }
+        if(Iy < Fy){
+            Uti.MoverCursor(0, 1);
+        }
+        if(Ix > Fx){
+            Uti.MoverCursor(-1, 0);
+        }
+        if(Iy > Fy){
+            Uti.MoverCursor(0, -1);
+        }
+    }
+}
+

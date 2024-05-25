@@ -30,7 +30,6 @@ int main()
     ShowCursor(true);
     bool repetir = true;
 
-
     while(repetir){
         //Elimiar caracteres que se colocan al presionar algun F
         Uti.SimularTecla(VK_BACK);
@@ -79,6 +78,16 @@ int main()
             Uti.MostrarSubMenuLinea();
             ActualizarPantalla();
         }
+        //Rombo
+        else if(GetKeyState(VK_F6) & 0x8000){
+            Uti.MostrarSubMenuRombo();
+            ActualizarPantalla();
+        }
+        //Hexagono
+        else if(GetKeyState(VK_F7) & 0x8000){
+            Uti.MostrarSubMenuHexagono();
+            ActualizarPantalla();
+        }
         else if(GetKeyState(VK_F8) & 0x8000){
             //Cambiar caracter para graficar
             Uti.AsignarCaracterDibujo();
@@ -87,6 +96,7 @@ int main()
         else if(GetKeyState(VK_F9) & 0x8000){
             //Limpiar pantalla
             Uti.LimpiarPantalla();
+            Uti.EliminarRegistrosDePantalla();
             //Imprimir controles de nuevo
             Uti.MostrarControles();
         }

@@ -44,7 +44,8 @@ public:
     void ReescribirEnPantalla();
     //procedimiento para cambiar el color del texto
     void CambiarColor();
-
+    //Eliminar registros de la pantalla
+    void EliminarRegistrosDePantalla();
 
     //Submenus
     void MostrarSubMenuCuadro();
@@ -58,6 +59,8 @@ public:
     void MostrarSubMenuRombo();
     //Sub menu de linea
     void MostrarSubMenuLinea();
+    //Sub menu hexagono
+    void MostrarSubMenuHexagono();
 
     //Gestión del caracter para dibujo
     //Obtener el caracter
