@@ -107,10 +107,8 @@ int main()
             ActualizarPantalla();
         }
         else if(GetKeyState(VK_F12) & 0X8000){
-            //Limpiar buffer
-            cin.clear();
-            //Mostrar el menu para que el usuario ingrese la información.
-            Uti.MenuPrincipal();
+            //llamar al proceso para ingresar la información del archivo
+            Uti.MostrarSubMenuGuardarArchivo();
             //Actualizar luego que se grafique
             ActualizarPantalla();
         }

@@ -17,6 +17,7 @@
 					<Add directory="include" />
 					<Add directory="../ConsolePaint" />
 					<Add directory="./" />
+					<Add directory="Archivos" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -30,6 +31,7 @@
 					<Add directory="include" />
 					<Add directory="../ConsolePaint" />
 					<Add directory="./" />
+					<Add directory="Archivos" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -56,6 +58,8 @@
 		<Unit filename="FiguraGeometrica/FiguraGeometricaRectangulo.cpp" />
 		<Unit filename="FiguraGeometrica/FiguraGeometricaRombo.cpp" />
 		<Unit filename="FiguraGeometrica/FiguraGeometricaTriangulo.cpp" />
+		<Unit filename="GestionArchivo.cpp" />
+		<Unit filename="GestionArchivo.h" />
 		<Unit filename="Utilerias.cpp" />
 		<Unit filename="Utilerias.h" />
 		<Unit filename="main.cpp" />

@@ -8,6 +8,10 @@ struct Cuadrado{
     int Ancho;
     bool MostrarRelleno;
     char Caracter;
+    bool Arriba;
+    bool Abajo;
+    bool Izquierda;
+    bool Derecha;
 };
 //Estructura para el rectangulo
 struct Rectangulo{
@@ -17,6 +21,8 @@ struct Rectangulo{
     int Alto;
     bool MostrarRelleno;
     char Caracter;
+    bool Arriba;
+    bool Abajo;
 };
 //Estructura para el circulo
 struct Circulo{
@@ -32,6 +38,10 @@ struct Triangulo{
     int Base;
     bool MostrarRelleno;
     char Caracter;
+    bool Arriba;
+    bool Abajo;
+    bool Izquierda;
+    bool Derecha;
 };
 struct Linea{
     int CoordenadaX;

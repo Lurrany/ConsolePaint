@@ -118,7 +118,7 @@
 1716140222 source:c:\users\adele\onedrive\escritorio\consolepaint\entidades.cpp
 	"Entidades.h"
 
-1716610210 c:\users\adele\onedrive\escritorio\consolepaint\entidades.h
+1716873066 c:\users\adele\onedrive\escritorio\consolepaint\entidades.h
 
 1716140222 source:c:\users\adele\onedrive\escritorio\consolepaint\figurageometrica\figurageometricacirculo.cpp
 	"../FiguraGeometricaCirculo.h"
@@ -129,7 +129,7 @@
 1716140222 c:\users\adele\onedrive\escritorio\consolepaint\figurageometricacirculo.h
 	"Entidades.h"
 
-1716617849 c:\users\adele\onedrive\escritorio\consolepaint\utilerias.h
+1716956036 c:\users\adele\onedrive\escritorio\consolepaint\utilerias.h
 	<string>
 	"TamanoPantalla.h"
 	<windows.h>
@@ -164,7 +164,7 @@
 1716140222 c:\users\adele\onedrive\escritorio\consolepaint\figurageometricatriangulo.h
 	"Entidades.h"
 
-1716618363 source:c:\users\adele\onedrive\escritorio\consolepaint\utilerias.cpp
+1716962152 source:c:\users\adele\onedrive\escritorio\consolepaint\utilerias.cpp
 	"Utilerias.h"
 	<iostream>
 	<string>
@@ -178,8 +178,9 @@
 	"FiguraGeometricaHexagono.h"
 	"Entidades.h"
 	<list>
+	"GestionArchivo.h"
 
-1716617319 source:c:\users\adele\onedrive\escritorio\consolepaint\figurageometrica\figurageometricahexagono.cpp
+1716621270 source:c:\users\adele\onedrive\escritorio\consolepaint\figurageometrica\figurageometricahexagono.cpp
 	"FiguraGeometricaHexagono.h"
 	"../FiguraGeometricaLinea.h"
 	<iostream>
@@ -196,7 +197,7 @@
 1716612165 c:\users\adele\onedrive\escritorio\consolepaint\figurageometricalinea.h
 	"Entidades.h"
 
-1716618386 source:c:\users\adele\onedrive\escritorio\consolepaint\main.cpp
+1716956100 source:c:\users\adele\onedrive\escritorio\consolepaint\main.cpp
 	<iostream>
 	<windows.h>
 	"Utilerias.h"
@@ -209,12 +210,30 @@
 	"FiguraGeometricaRombo.h"
 	"FiguraGeometricaHexagono.h"
 
-1716615346 source:c:\users\adele\onedrive\escritorio\consolepaint\figurageometrica\figurageometricarombo.cpp
+1716621251 source:c:\users\adele\onedrive\escritorio\consolepaint\figurageometrica\figurageometricarombo.cpp
 	"FiguraGeometricaRombo.h"
 	"../FiguraGeometricaLinea.h"
 	"../Entidades.h"
 	<iostream>
 
 1716266703 c:\users\adele\onedrive\escritorio\consolepaint\figurageometricarombo.h
+	"Entidades.h"
+
+1716961910 source:c:\users\adele\onedrive\escritorio\consolepaint\gestionarchivo.cpp
+	"GestionArchivo.h"
+	<iostream>
+	<stdlib.h>
+	<algorithm>
+	<list>
+	"Entidades.h"
+	<stdio.h>
+	<errno.h>
+	<fstream>
+
+1716958823 c:\users\adele\onedrive\escritorio\consolepaint\gestionarchivo.h
+	<iostream>
+	<stdlib.h>
+	<algorithm>
+	<list>
 	"Entidades.h"
 

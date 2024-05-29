@@ -61,6 +61,8 @@ public:
     void MostrarSubMenuLinea();
     //Sub menu hexagono
     void MostrarSubMenuHexagono();
+    //Solicitar la información al usuario para guardar el archivo de texto
+    void MostrarSubMenuGuardarArchivo();
 
     //Gestión del caracter para dibujo
     //Obtener el caracter

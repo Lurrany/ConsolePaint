@@ -11,13 +11,16 @@
 #include "FiguraGeometricaHexagono.h"
 #include "Entidades.h"
 #include <list>
+#include "GestionArchivo.h"
 
 using namespace std;
 int _coordenadaXGuardada, _coordenadaYGuardada;
+//Variables para guardar las ultimas figuras realizadas (ya no se uso)
 Cuadrado _ultimoCuadrado;
 Circulo _ultimoCirculo;
 Rectangulo _ultimoRectangulo;
 Triangulo _ultimoTriangulo;
+
 //variables de coordenadas.
 int _coordenadaX = 0;
 int _coordenadaY = 0;
@@ -31,6 +34,7 @@ int _colorCaracteres = 15; //iniciar el color principal en blanco :D
 const int _colorTextoBlanco = 15;
 //Lista de objetos con las coordenada en pantalla
 std::list<PosicionPantalla> _posicionesEnPantalla;
+
 
 //procedimiento para cambiar el color
 void Utilerias::CambiarColor(int Color){
@@ -86,7 +90,10 @@ void Utilerias::ReescribirEnPantalla(){
 }
 //Metodo para imprimir un mensaje.
 void Utilerias::MostrarMensaje(std::string Mensaje, bool SaltoLinea){
-    cout << Mensaje << endl;
+    cout << Mensaje;
+    if(SaltoLinea){
+        cout << endl;
+    }
 }
 //metodo para ajustar el tamaño de la pantalla.
 void Utilerias::AjustarTamanoVentana(int ancho, int alto){
@@ -100,7 +107,7 @@ void Utilerias::LimpiarPantalla(){
 //Leer texto
 std::string Utilerias::LeerValorTexto(std::string Mensaje, int TamanoTexto){
     //Mostrar mensaje al usuario
-    MostrarMensaje(Mensaje);
+    MostrarMensaje(Mensaje, false);
     //declarar variable para guardar el resultado.
     char TextoIngresadoPorUsuario[TamanoTexto] = "";
     //leer valor ingresado
@@ -119,7 +126,7 @@ int Utilerias::LeerValorNumerico(std::string Mensaje){
     //retornar el valor ingresado
     return ValorIngresadoPorUsuario;
 }
-//Metodo para imprimir el menú
+//Metodo para imprimir el menú -- ya no se usa por fase 2
 int Utilerias::MenuPrincipal(){
     int Opcion;
     GuardarCoordenadasActuales();
@@ -241,6 +248,11 @@ void Utilerias::MostrarSubMenuTriangulo(){
     cin >> NuevoTri.Base;
     cin.ignore();
 
+    int op;
+    cout << "Orientacion: [^ = 1] [v = 2] [<- = 3] [-> = 4]";
+    cin >> op;
+    cin.ignore();
+
     FigurageometricaTriangulo Tri;
     Tri.ImprimirTriangulo(NuevoTri);
 }
@@ -293,8 +305,8 @@ void Utilerias::MostrarSubMenuLinea(){
     cin.ignore();
 
     int Direccion;
-    cout << "Indique la direccion 1 = vertical | 2 = horizontal " << endl;
-    cout << " 3 = inclidado a la derecha | 4 = inclinado a la izquierda: ";
+    MoverACoordenada(_coordenadaXGuardada + 5, _coordenadaYGuardada + 1, true);
+    cout << "Direccion [| = 1] [- = 2] [\\ = 3] [/ = 4]: ";
     cin >> Direccion;
     cin.ignore();
 
@@ -350,6 +362,20 @@ void Utilerias::MostrarSubMenuHexagono(){
 
     FiguraGeometricaHexagono Hexa;
     Hexa.ImprimirHexagono(NuevoHexagono);
+}
+void Utilerias::MostrarSubMenuGuardarArchivo(){
+    //Guardar las coordenadas
+    GuardarCoordenadasActuales();
+    //solicitar al usuario el nombre del archivo
+    string NombreArchivo = LeerValorTexto("Ingrese el nombre para el archivo:", 50);
+    //Asignar extensión
+    NombreArchivo += ".txt";
+    //Clase de gestión de archivos
+    GestionArchivo Archi;
+    //Crear el achivo con el nombre que el usuario elija
+    //Archi.CrearArchivo(NombreArchivo);
+    //Exportar la pantalla al archivo recien creado
+    Archi.Exportar(("Exportados\\" + NombreArchivo), _posicionesEnPantalla, ObtenerColumnas(), ObtenerFilas());
 }
 void Utilerias::MostrarControles(){
     cout << "F1: Triangulo | F2: Cuadrado | F3: Rectangulo | F4: Circulo | F5: Linea | F6: Rombo | F7: Hexagono | F8: Nuevo Caracter" << endl;
