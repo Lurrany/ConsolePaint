@@ -112,6 +112,10 @@ int main()
             //Actualizar luego que se grafique
             ActualizarPantalla();
         }
+        else if((GetKeyState(VK_CONTROL) & 0x8000) && (GetKeyState('A') & 0x8000)){
+            Uti.MostrarSubMenuImportarArchivo();
+            ActualizarPantalla();
+        }
         else if(GetKeyState(VK_ESCAPE) & 0x8000){
             //Salir
             repetir = false;

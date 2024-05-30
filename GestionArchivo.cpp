@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <fstream>
+#include "Utilerias.h"
 
 using namespace std;
 
@@ -74,4 +75,41 @@ void GestionArchivo::Exportar(string NombreArchivo, list<PosicionPantalla> Carac
     //apusar para que el usuario pueda ver el mensaje
     system("pause");
 }
-
+list<PosicionPantalla> GestionArchivo::LeerArchivo(string NombreArchivo, int FilaActual, int ColumnaActual, int ColorActual, int CaracterDibujoActual){
+    //matriz de pantalla
+    string Pantalla[FilaActual][ColumnaActual];
+    //crear y abrir el archivo
+    ifstream Archivo;
+    Archivo.open(NombreArchivo);
+    //Lista con las nuevas posiciones :D
+    list<PosicionPantalla> NuevaPosicion;
+    //verificar que se abre el archivo indicado :D
+    if(!Archivo.good()){
+        cout << "El archivo: " << NombreArchivo << ", no existe." << endl;
+        system("pause");
+    }
+    else{
+        //variable para el valor de la linea
+         string Lin;
+         int FilaRecorrida;
+        //while de lectura de linea
+         while(getline(Archivo, Lin)){
+            //for de recorrido de linea para agregarlo a la lista de posiciones
+            for(int c = 0; c < Lin.length(); c++){
+                if(Lin[c] != ' '){
+                    PosicionPantalla pos;
+                    pos.Caracter = CaracterDibujoActual;
+                    pos.Color = ColorActual;
+                    pos.CoordenadaX = c;
+                    pos.CoordenadaY = FilaRecorrida;
+                    NuevaPosicion.push_back(pos);
+                }
+            }
+            FilaRecorrida++;
+        }
+    }
+    Archivo.close();
+    cout << "El archivo: " << NombreArchivo << ", fue importado." << endl;
+    system("pause");
+    return NuevaPosicion;
+}

@@ -129,7 +129,7 @@
 1716140222 c:\users\adele\onedrive\escritorio\consolepaint\figurageometricacirculo.h
 	"Entidades.h"
 
-1716956036 c:\users\adele\onedrive\escritorio\consolepaint\utilerias.h
+1717037335 c:\users\adele\onedrive\escritorio\consolepaint\utilerias.h
 	<string>
 	"TamanoPantalla.h"
 	<windows.h>
@@ -164,7 +164,7 @@
 1716140222 c:\users\adele\onedrive\escritorio\consolepaint\figurageometricatriangulo.h
 	"Entidades.h"
 
-1716962152 source:c:\users\adele\onedrive\escritorio\consolepaint\utilerias.cpp
+1717040618 source:c:\users\adele\onedrive\escritorio\consolepaint\utilerias.cpp
 	"Utilerias.h"
 	<iostream>
 	<string>
@@ -197,7 +197,7 @@
 1716612165 c:\users\adele\onedrive\escritorio\consolepaint\figurageometricalinea.h
 	"Entidades.h"
 
-1716956100 source:c:\users\adele\onedrive\escritorio\consolepaint\main.cpp
+1717037496 source:c:\users\adele\onedrive\escritorio\consolepaint\main.cpp
 	<iostream>
 	<windows.h>
 	"Utilerias.h"
@@ -219,7 +219,7 @@
 1716266703 c:\users\adele\onedrive\escritorio\consolepaint\figurageometricarombo.h
 	"Entidades.h"
 
-1716961910 source:c:\users\adele\onedrive\escritorio\consolepaint\gestionarchivo.cpp
+1717040657 source:c:\users\adele\onedrive\escritorio\consolepaint\gestionarchivo.cpp
 	"GestionArchivo.h"
 	<iostream>
 	<stdlib.h>
@@ -229,11 +229,13 @@
 	<stdio.h>
 	<errno.h>
 	<fstream>
+	"Utilerias.h"
 
-1716958823 c:\users\adele\onedrive\escritorio\consolepaint\gestionarchivo.h
+1717040433 c:\users\adele\onedrive\escritorio\consolepaint\gestionarchivo.h
 	<iostream>
 	<stdlib.h>
 	<algorithm>
 	<list>
 	"Entidades.h"
+	"Utilerias.h"
 

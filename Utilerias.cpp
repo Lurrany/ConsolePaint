@@ -377,6 +377,21 @@ void Utilerias::MostrarSubMenuGuardarArchivo(){
     //Exportar la pantalla al archivo recien creado
     Archi.Exportar(("Exportados\\" + NombreArchivo), _posicionesEnPantalla, ObtenerColumnas(), ObtenerFilas());
 }
+void Utilerias::MostrarSubMenuImportarArchivo(){
+    //Guardar coordenadas
+    GuardarCoordenadasActuales();
+    //Solicitar nombre del archivo
+    string NombreArchivo = LeerValorTexto("Ingrese el nombre del archivo a abrir:", 50);
+    //agregar extensión
+    NombreArchivo += ".txt";
+    //Clase de gestión de archivos
+    GestionArchivo Archi;
+    list<PosicionPantalla> Resultado = Archi.LeerArchivo(("Exportados\\" + NombreArchivo), ObtenerFilas(), ObtenerColumnas(), _colorCaracteres, _caracterDibujo);
+
+    _posicionesEnPantalla = Resultado;
+    ReescribirEnPantalla();
+
+}
 void Utilerias::MostrarControles(){
     cout << "F1: Triangulo | F2: Cuadrado | F3: Rectangulo | F4: Circulo | F5: Linea | F6: Rombo | F7: Hexagono | F8: Nuevo Caracter" << endl;
     cout << "F9: Limpiar Pantalla | F10: Color de Caracter | F12: Grabar Pantalla | Ctrl+A: Abrir archivo |Esc: Salir | paint 1.5.0";
