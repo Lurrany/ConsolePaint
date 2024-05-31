@@ -59,6 +59,8 @@ struct Rombo{
     int Base;
     bool MostrarRelleno;
     char Caracter;
+    bool Arriba;
+    bool Abajo;
 };
 struct Hexagono{
     int CoordenadaX;

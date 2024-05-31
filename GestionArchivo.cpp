@@ -76,6 +76,8 @@ void GestionArchivo::Exportar(string NombreArchivo, list<PosicionPantalla> Carac
     system("pause");
 }
 list<PosicionPantalla> GestionArchivo::LeerArchivo(string NombreArchivo, int FilaActual, int ColumnaActual, int ColorActual, int CaracterDibujoActual){
+    //Clase utilerias
+    Utilerias Uti;
     //matriz de pantalla
     string Pantalla[FilaActual][ColumnaActual];
     //crear y abrir el archivo
@@ -85,8 +87,7 @@ list<PosicionPantalla> GestionArchivo::LeerArchivo(string NombreArchivo, int Fil
     list<PosicionPantalla> NuevaPosicion;
     //verificar que se abre el archivo indicado :D
     if(!Archivo.good()){
-        cout << "El archivo: " << NombreArchivo << ", no existe." << endl;
-        system("pause");
+        Uti.MostrarMensaje("El archivo: " + NombreArchivo + ", no existe.");
     }
     else{
         //variable para el valor de la linea
@@ -107,9 +108,8 @@ list<PosicionPantalla> GestionArchivo::LeerArchivo(string NombreArchivo, int Fil
             }
             FilaRecorrida++;
         }
+        Uti.MostrarMensaje("El archivo: " + NombreArchivo + ", fue importado.");
     }
     Archivo.close();
-    cout << "El archivo: " << NombreArchivo << ", fue importado." << endl;
-    system("pause");
     return NuevaPosicion;
 }

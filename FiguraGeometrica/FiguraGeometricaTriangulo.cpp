@@ -2,12 +2,81 @@
 #include "../Utilerias.h"
 #include "../Entidades.h"
 #include "FiguraGeometricaTriangulo.h"
+#include "../FiguraGeometricaLinea.h"
 
 using namespace std;
 
 void FigurageometricaTriangulo::ImprimirTriangulo(const Triangulo& Tri){
     //Clase utilerias
     Utilerias Uti;
+
+    FiguraGeometricaLinea FiguraLinea;
+    int PuntoUnoX, PuntoUnoY, PuntoDosX, PuntoDosY, PuntoTresX, PuntoTresY;
+
+    if(Tri.Arriba == true){
+        PuntoUnoX = Tri.CoordenadaX;
+        PuntoUnoY = Tri.CoordenadaY;
+
+        PuntoDosX = Tri.CoordenadaX ;
+        PuntoDosY = Tri.CoordenadaY + Tri.Base;
+
+        PuntoTresX = PuntoDosX + Tri.Base;
+        PuntoTresY = Tri.CoordenadaY + Tri.Base;
+
+        FiguraLinea.ImprimirLinea(PuntoDosX, PuntoDosY, PuntoUnoX, PuntoUnoY, Tri.Caracter, Tri.Base);
+        FiguraLinea.ImprimirLinea(PuntoDosX, PuntoDosY, PuntoTresX, PuntoTresY, Tri.Caracter, Tri.Base);
+        FiguraLinea.ImprimirLinea(PuntoUnoX + Tri.Base, PuntoUnoY, PuntoTresX, PuntoTresY, Tri.Caracter, Tri.Base+1);
+    }
+    else if(Tri.Abajo == true){
+        PuntoUnoX = Tri.CoordenadaX;
+        PuntoUnoY = Tri.CoordenadaY;
+
+        PuntoDosX = Tri.CoordenadaX + Tri.Base;
+        PuntoDosY = (Tri.CoordenadaY);
+
+        PuntoTresX = Tri.CoordenadaX + Tri.Base;
+        PuntoTresY = (Tri.CoordenadaY + Tri.Base);
+
+        FiguraLinea.ImprimirLinea(PuntoUnoX, PuntoUnoY, PuntoDosX, PuntoDosY, Tri.Caracter, Tri.Base+1);
+        FiguraLinea.ImprimirLinea(PuntoUnoX, PuntoUnoY, PuntoTresX-Tri.Base, PuntoTresY, Tri.Caracter, Tri.Base);
+        FiguraLinea.ImprimirLinea(PuntoTresX , PuntoTresY, PuntoDosX, PuntoDosY, Tri.Caracter, Tri.Base);
+
+
+    }
+    else if(Tri.Derecha == true){
+        PuntoUnoX = Tri.CoordenadaX;
+        PuntoUnoY = Tri.CoordenadaY;
+
+        PuntoDosX = Tri.CoordenadaX-1;
+        PuntoDosY = Tri.CoordenadaY + Tri.Base *2;
+
+        PuntoTresX = Tri.CoordenadaX + Tri.Base;
+        PuntoTresY = Tri.CoordenadaY + (Tri.Base *0.9);
+
+        FiguraLinea.ImprimirLinea(PuntoUnoX, PuntoUnoY, PuntoDosX, PuntoDosY, Tri.Caracter, Tri.Base*2);
+        FiguraLinea.ImprimirLinea(PuntoUnoX, PuntoUnoY, PuntoTresX, PuntoTresY, Tri.Caracter, Tri.Base);
+        FiguraLinea.ImprimirLinea(PuntoDosX +1, PuntoDosY, PuntoTresX, PuntoTresY, Tri.Caracter, Tri.Base+1);
+
+    }
+    else if(Tri.Izquierda == true){
+        PuntoUnoX = Tri.CoordenadaX + Tri.Base;
+        PuntoUnoY = Tri.CoordenadaY;
+
+        PuntoDosX = Tri.CoordenadaX ;
+        PuntoDosY = Tri.CoordenadaY + (Tri.Base) ;
+
+        PuntoTresX = Tri.CoordenadaX - Tri.Base;
+        PuntoTresY = (Tri.CoordenadaY + (Tri.Base *0.9));
+
+        FiguraLinea.ImprimirLinea(PuntoUnoX, PuntoUnoY, PuntoDosX, PuntoDosY, Tri.Caracter, Tri.Base *2);
+        FiguraLinea.ImprimirLinea(PuntoTresX, PuntoTresY, PuntoUnoX, PuntoUnoY, Tri.Caracter, Tri.Base+1);
+        FiguraLinea.ImprimirLinea(PuntoTresX, PuntoTresY, PuntoDosX, PuntoDosY, Tri.Caracter, Tri.Base);
+    }
+
+    //FiguraLinea.ImprimirLinea(PuntoDosX, PuntoDosY, PuntoTresX, PuntoTresY, Tri.Caracter, Tri.Base);
+    /*FiguraLinea.ImprimirLinea(Tri.CoordenadaX, Tri.CoordenadaY, Tri.CoordenadaX - (Tri.Base/2), Tri.Base, Tri.Caracter, Tri.Base);
+    FiguraLinea.ImprimirLinea(Tri.CoordenadaX, Tri.CoordenadaY, Tri.Base/2, Tri.Base, Tri.Caracter, Tri.Base);*/
+    /*
     //coordenadas
     int x;
     int y;
@@ -57,4 +126,5 @@ void FigurageometricaTriangulo::ImprimirTriangulo(const Triangulo& Tri){
         Uti.MoverCursor(0, 1);
 
     }
+    */
 }

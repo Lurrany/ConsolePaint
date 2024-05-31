@@ -90,10 +90,17 @@ void Utilerias::ReescribirEnPantalla(){
 }
 //Metodo para imprimir un mensaje.
 void Utilerias::MostrarMensaje(std::string Mensaje, bool SaltoLinea){
-    cout << Mensaje;
-    if(SaltoLinea){
-        cout << endl;
-    }
+    //Guardar coordenadas
+    GuardarCoordenadasActuales();
+    //Mover al final de y
+    MoverACoordenada(0, ObtenerFilas()-1, true);
+    cout << "[Mensaje] " << Mensaje << " ";
+    system("pause");
+    MoverACoordenada(_coordenadaXGuardada, _coordenadaYGuardada, true);
+    //reescribir
+    LimpiarPantalla();
+    ReescribirEnPantalla();
+    MostrarControles();
 }
 //metodo para ajustar el tamaño de la pantalla.
 void Utilerias::AjustarTamanoVentana(int ancho, int alto){
@@ -106,23 +113,40 @@ void Utilerias::LimpiarPantalla(){
 }
 //Leer texto
 std::string Utilerias::LeerValorTexto(std::string Mensaje, int TamanoTexto){
-    //Mostrar mensaje al usuario
-    MostrarMensaje(Mensaje, false);
+    //Guardar coordenadas
+    GuardarCoordenadasActuales();
+    //Mover al final de y
+    MoverACoordenada(0, ObtenerFilas()-1, true);
+    cout << "[Texto] " << Mensaje << " ";
     //declarar variable para guardar el resultado.
     char TextoIngresadoPorUsuario[TamanoTexto] = "";
     //leer valor ingresado
     cin.getline(TextoIngresadoPorUsuario, TamanoTexto);
+    MoverACoordenada(_coordenadaXGuardada, _coordenadaYGuardada, true);
+    //reescribir
+    LimpiarPantalla();
+    ReescribirEnPantalla();
+    MostrarControles();
     //retornar el valor ingresado
     return TextoIngresadoPorUsuario;
 }
 int Utilerias::LeerValorNumerico(std::string Mensaje){
+    //Guardar coodenadas
+    GuardarCoordenadasActuales();
     //Mostrar mensaje al usuario
-    MostrarMensaje(Mensaje);
+    MoverACoordenada(0, ObtenerFilas()-1, true);
+    //mostrar mensaje
+    cout << "[Numero] " << Mensaje << " ";
     //declarar variable para guardar el resultado.
     int ValorIngresadoPorUsuario;
     //leer valor ingresado
     cin >> ValorIngresadoPorUsuario;
     cin.ignore();
+    MoverACoordenada(_coordenadaXGuardada, _coordenadaYGuardada, true);
+    //reescribir
+    LimpiarPantalla();
+    ReescribirEnPantalla();
+    MostrarControles();
     //retornar el valor ingresado
     return ValorIngresadoPorUsuario;
 }
@@ -201,11 +225,10 @@ void Utilerias::MostrarSubMenuCuadro(){
     NuevoCuadrado.CoordenadaY = _coordenadaYGuardada;
     NuevoCuadrado.MostrarRelleno = false;
     NuevoCuadrado.Caracter = _caracterDibujo;
-    MoverCursor(0,1);
-    cout << "Ancho del cuadro: ";
-    cin >> NuevoCuadrado.Ancho;
-    cin.ignore();
 
+    //Usar función para solicitar valores numericos :D
+    NuevoCuadrado.Ancho = LeerValorNumerico("Ancho del cuadro:");
+    //Clase para graficar cuadrado
     FiguraGeometricaCuadrado Cuadrado;
     Cuadrado.ImprimirCuadrado(NuevoCuadrado);
 }
@@ -219,14 +242,10 @@ void Utilerias::MostrarSubMenuRectangulo(){
     NuevoRect.MostrarRelleno = false;
     NuevoRect.Caracter = _caracterDibujo;
 
-    MoverCursor(0,1);
-    cout << "Ancho del rectangulo: ";
-    cin >> NuevoRect.Ancho;
-    cin.ignore();
-    MoverCursor(0,1);
-    cout << "Alto del rectangulo: ";
-    cin >> NuevoRect.Alto;
-    cin.ignore();
+
+    //Solicitar valores al usuario
+    NuevoRect.Ancho = LeerValorNumerico("Ancho del rectangulo:");
+    NuevoRect.Alto = LeerValorNumerico("Alto del rectangulo:");
 
     FiguraGeometricaRectangulo Rectangulo;
     Rectangulo.ImprimirRectangulo(NuevoRect);
@@ -243,16 +262,42 @@ void Utilerias::MostrarSubMenuTriangulo(){
     NuevoTri.Caracter = _caracterDibujo;
 
     //Solicitar la información al usuario
-    MoverCursor(0,1);
-    cout << "Base del triangulo: ";
-    cin >> NuevoTri.Base;
-    cin.ignore();
-
+    NuevoTri.Base = LeerValorNumerico("Base del triangulo:");
+    //Solicitar la orientación
     int op;
-    cout << "Orientacion: [^ = 1] [v = 2] [<- = 3] [-> = 4]";
-    cin >> op;
-    cin.ignore();
-
+    op = LeerValorNumerico("Orientacion: [^ = 1] [v = 2] [<- = 3] [-> = 4]");
+    switch(op){
+    case 1:
+        NuevoTri.Arriba = true;
+        NuevoTri.Abajo = false;
+        NuevoTri.Izquierda = false;
+        NuevoTri.Derecha = false;
+        break;
+    case 2:
+        NuevoTri.Arriba = false;
+        NuevoTri.Abajo = true;
+        NuevoTri.Izquierda = false;
+        NuevoTri.Derecha = false;
+        break;
+    case 3:
+        NuevoTri.Arriba = false;
+        NuevoTri.Abajo = false;
+        NuevoTri.Izquierda = true;
+        NuevoTri.Derecha = false;
+        break;
+    case 4:
+        NuevoTri.Arriba = false;
+        NuevoTri.Abajo = false;
+        NuevoTri.Izquierda = false;
+        NuevoTri.Derecha = true;
+        break;
+    default:
+        NuevoTri.Arriba = true;
+        NuevoTri.Abajo = false;
+        NuevoTri.Izquierda = false;
+        NuevoTri.Derecha = false;
+        break;
+    }
     FigurageometricaTriangulo Tri;
     Tri.ImprimirTriangulo(NuevoTri);
 }
@@ -268,9 +313,7 @@ void Utilerias::MostrarSubMenuCirculo(){
 
     //Solicitar la información al usuario
     MoverCursor(0, 1);
-    cout << "Ingrese el radio del circulo: ";
-    cin >> NuevoCirculo.Radio;
-    cin.ignore();
+    NuevoCirculo.Radio = LeerValorNumerico("Ingrese el radio del circulo:");
 
     FiguraGeometricaCirculo Cir;
     Cir.ImprimirCirculo(NuevoCirculo);
@@ -286,9 +329,18 @@ void Utilerias::MostrarSubMenuRombo(){
     NuevoRombo.Caracter = _caracterDibujo;
 
     //Solicitar la información al usuario
-    cout << "Ingrese la longitud de los lados: ";
-    cin >> NuevoRombo.Base;
-    cin.ignore();
+    NuevoRombo.Base = LeerValorNumerico("Ingrese la longitud de los lados:");
+    int Orientacion;
+    Orientacion = LeerValorNumerico("Orientacion [^ = 1] [v = 2]: ");
+
+    switch(Orientacion){
+    case 1:
+        NuevoRombo.Arriba = true;
+        break;
+    default:
+        NuevoRombo.Abajo = true;
+        break;
+    }
 
     FiguraGeometricaRombo Rom;
     Rom.ImprimirRombo(NuevoRombo);
@@ -300,15 +352,10 @@ void Utilerias::MostrarSubMenuLinea(){
     //Objeto linea
     Linea Lin;
     //Solicitar la información al usuario
-    cout << "Indique la longitud de la linea: ";
-    cin >> Lin.Longitud;
-    cin.ignore();
+    Lin.Longitud = LeerValorNumerico("Indique la longitud de la linea:");
 
     int Direccion;
-    MoverACoordenada(_coordenadaXGuardada + 5, _coordenadaYGuardada + 1, true);
-    cout << "Direccion [| = 1] [- = 2] [\\ = 3] [/ = 4]: ";
-    cin >> Direccion;
-    cin.ignore();
+    Direccion = LeerValorNumerico("Direccion [| = 1] [- = 2] [\\ = 3] [/ = 4]:");
 
     switch(Direccion){
         case 1:
@@ -356,9 +403,7 @@ void Utilerias::MostrarSubMenuHexagono(){
     NuevoHexagono.Caracter = _caracterDibujo;
 
     //Solicitar la información al usuario
-    cout << "Ingrese la longitud de los lados: ";
-    cin >> NuevoHexagono.Base;
-    cin.ignore();
+    NuevoHexagono.Base = LeerValorNumerico("Ingrese la longitud de los lados:");
 
     FiguraGeometricaHexagono Hexa;
     Hexa.ImprimirHexagono(NuevoHexagono);
@@ -393,6 +438,7 @@ void Utilerias::MostrarSubMenuImportarArchivo(){
 
 }
 void Utilerias::MostrarControles(){
+    MoverACoordenada(0,0, true);
     cout << "F1: Triangulo | F2: Cuadrado | F3: Rectangulo | F4: Circulo | F5: Linea | F6: Rombo | F7: Hexagono | F8: Nuevo Caracter" << endl;
     cout << "F9: Limpiar Pantalla | F10: Color de Caracter | F12: Grabar Pantalla | Ctrl+A: Abrir archivo |Esc: Salir | paint 1.5.0";
 }

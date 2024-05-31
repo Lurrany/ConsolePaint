@@ -71,4 +71,3 @@ void FiguraGeometricaLinea::ImprimirLinea(int Ix, int Iy, int Fx, int Fy, char C
         }
     }
 }
-
