@@ -71,8 +71,8 @@ void GestionArchivo::Exportar(string NombreArchivo, list<PosicionPantalla> Carac
     //cerrar el archivo
     Archivo.close();
     //indicar al usuario que se guardo el archivo
-    cout << "Se exporto el archivo en Exportados\\" << NombreArchivo << endl;
-    //apusar para que el usuario pueda ver el mensaje
+    Utilerias Uti;
+    Uti.MostrarMensaje("Se exporto el archivo en Exportados\\" + NombreArchivo, false);
     system("pause");
 }
 list<PosicionPantalla> GestionArchivo::LeerArchivo(string NombreArchivo, int FilaActual, int ColumnaActual, int ColorActual, int CaracterDibujoActual){

@@ -122,6 +122,7 @@ std::string Utilerias::LeerValorTexto(std::string Mensaje, int TamanoTexto){
     char TextoIngresadoPorUsuario[TamanoTexto] = "";
     //leer valor ingresado
     cin.getline(TextoIngresadoPorUsuario, TamanoTexto);
+    cin.ignore();
     MoverACoordenada(_coordenadaXGuardada, _coordenadaYGuardada, true);
     //reescribir
     LimpiarPantalla();
@@ -349,8 +350,13 @@ void Utilerias::MostrarSubMenuLinea(){
     //Guardar coordenadas para dibujar el rombo
     //Ya no recuerdo para que se guardaban las coordenadas :(
     GuardarCoordenadasActuales();
+
     //Objeto linea
     Linea Lin;
+    Lin.Caracter = _caracterDibujo;
+    Lin.CoordenadaX = _coordenadaXGuardada;
+    Lin.CoordenadaY = _coordenadaYGuardada;
+
     //Solicitar la información al usuario
     Lin.Longitud = LeerValorNumerico("Indique la longitud de la linea:");
 
@@ -383,9 +389,7 @@ void Utilerias::MostrarSubMenuLinea(){
             Lin.InclinacionIzquierda = true;
             break;
     }
-    Lin.Caracter = _caracterDibujo;
-    Lin.CoordenadaX = _coordenadaXGuardada;
-    Lin.CoordenadaY = _coordenadaYGuardada;
+
 
     //Objeto para graficar la linea
     FiguraGeometricaLinea NuevaLinea;
@@ -563,21 +567,49 @@ void Utilerias::SimularTecla(WORD Tecla){
 
 //Obtener el caracter de dibujo actual.
 char Utilerias::ObtenerCaracterDibujo(){
+
     cout << "EL caracter para graficar actual es: " << _caracterDibujo;
     return _caracterDibujo;
 }
 //Asignar un nuevo caracter para dibujar
 void Utilerias::AsignarCaracterDibujo(){
-    cout << "Ingrese el nuevo caracter para graficar: ";
+     //Guardar coodenadas
+    GuardarCoordenadasActuales();
+    //mover
+    MoverACoordenada(0, ObtenerFilas()-1, true);
+    //solicitar la información
+    cout << "[char] Ingrese el nuevo caracter para graficar: ";
     cin >>_caracterDibujo;
+    //Mostrar mensaje al usuario
+    MoverACoordenada(_coordenadaXGuardada, _coordenadaYGuardada, true);
+    //reescribir
+    LimpiarPantalla();
+    ReescribirEnPantalla();
+    MostrarControles();
 }
 
 //Cambiar el color
 void Utilerias::CambiarColor(){
+
+    //Guardar coodenadas
+    GuardarCoordenadasActuales();
+    //Mover
+    MoverACoordenada(0, ObtenerFilas()-1, true);
+    //Solicitar la información
+
+    //Seleccionar
     int Opcion;
     cout << "Seleccione un color para el texto(1=Rojo, 2=Azul, 3=Verde, 4=Personalizado): ";
     cin >> Opcion;
     cin.ignore();
+
+    //Mostrar mensaje al usuario
+    MoverACoordenada(_coordenadaXGuardada, _coordenadaYGuardada, true);
+    //reescribir
+    LimpiarPantalla();
+    ReescribirEnPantalla();
+    MostrarControles();
+
 
     switch(Opcion){
         case 1:
@@ -590,10 +622,23 @@ void Utilerias::CambiarColor(){
             _colorCaracteres = FOREGROUND_GREEN;
             break;
         case 4:
-            cout << "Ingrese el codigo de color: ";
+    //Mover
+    MoverACoordenada(0, ObtenerFilas()-1, true);
+    //Solicitar la información
+
+    //Seleccionar
+    cout << "Ingrese el codigo de color: ";
             cin >> _caracterDibujo;
             cin.ignore();
             break;
+
+    //Mostrar mensaje al usuario
+    MoverACoordenada(_coordenadaXGuardada, _coordenadaYGuardada, true);
+    //reescribir
+    LimpiarPantalla();
+    ReescribirEnPantalla();
+    MostrarControles();
+
     }
 }
 //Elimiar registros de pantalla

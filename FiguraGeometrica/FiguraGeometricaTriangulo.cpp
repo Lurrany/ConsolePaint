@@ -72,7 +72,7 @@ void FigurageometricaTriangulo::ImprimirTriangulo(const Triangulo& Tri){
         FiguraLinea.ImprimirLinea(PuntoTresX, PuntoTresY, PuntoUnoX, PuntoUnoY, Tri.Caracter, Tri.Base+1);
         FiguraLinea.ImprimirLinea(PuntoTresX, PuntoTresY, PuntoDosX, PuntoDosY, Tri.Caracter, Tri.Base);
     }
-
+    //Codigo antiguo para graficar triangulo
     //FiguraLinea.ImprimirLinea(PuntoDosX, PuntoDosY, PuntoTresX, PuntoTresY, Tri.Caracter, Tri.Base);
     /*FiguraLinea.ImprimirLinea(Tri.CoordenadaX, Tri.CoordenadaY, Tri.CoordenadaX - (Tri.Base/2), Tri.Base, Tri.Caracter, Tri.Base);
     FiguraLinea.ImprimirLinea(Tri.CoordenadaX, Tri.CoordenadaY, Tri.Base/2, Tri.Base, Tri.Caracter, Tri.Base);*/
